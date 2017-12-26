@@ -1,107 +1,140 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import "./style.scss";
 
 export class CircularSlider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isPinching: false
+            mousePressed: false
         };
+        this.maxCurveWidth = Math.max(
+            this.getCircleProgressMainCircleStrokeWidth(),
+            this.getCircleProgressMainProgressStrokeWidth()
+        );
+        this.radius =
+            this.props.side / 2 -
+            Math.max(this.maxCurveWidth, this.getCircleProgressKnobRadius() * 2) / 2;
     }
     componentDidMount() {
-        this.x = 0;
-        this.y = 0;
         document.addEventListener("mousemove", this.handleMouseMove);
         document.addEventListener("mouseup", this.handleMouseUp);
     }
-
     componentWillUnmount() {
         document.removeEventListener("mousemove", this.handleMouseMove);
         document.removeEventListener("mouseup", this.handleMouseUp);
     }
-
     handleMouseUp = () => {
-        this.setState({ isPinching: false });
+        this.setState({ mousePressed: false });
     };
-
-    handleMouseDown = e => {
-        e.preventDefault();
-        const { left, top, width, height } = this.potar.getBoundingClientRect();
-        this.x = e.pageX - (left + width / 2);
-        this.y = top + height / 2 - e.pageY;
-        this.setState({ isPinching: true });
+    handleMouseDown = event => {
+        event.preventDefault();
+        this.setState({ mousePressed: true });
     };
-
-    handleMouseMove = e => {
-        if (this.state.isPinching) {
-            const { left, top, width, height } = this.potar.getBoundingClientRect();
-            const x = e.pageX - (left + width / 2);
-            const y = top + height / 2 - e.pageY;
-            const dx = (x - this.x) / 100;
-            const dy = (y - this.y) / 100;
-            this.x = x;
-            this.y = y;
-            if (this.props.onChange) {
-                let xValue = this.props.value + dx;
-                let yValue = this.props.value + dy;
-                if (xValue < 0) {
-                    xValue = 0;
-                }
-                if (xValue > 1) {
-                    xValue = 1;
-                }
-                if (yValue < 0) {
-                    yValue = 0;
-                }
-                if (yValue > 1) {
-                    yValue = 1;
-                }
-                this.props.onChange(xValue, yValue);
-            }
-        }
-    };
-
+    getCircleProgressMainCircleStrokeWidth() {
+        return this.props.circleWidth === undefined
+            ? this.props.side / 2 / this.props.circleWidthRel
+            : this.props.circleWidth;
+    }
+    getCircleProgressMainProgressStrokeWidth() {
+        return this.props.progressWidth === undefined
+            ? this.props.side / 2 / this.props.progressWidthRel
+            : this.props.progressWidth;
+    }
+    getCircleProgressCenter() {
+        return this.props.side / 2;
+    }
+    getCircleProgressAngle() {
+        return this.props.angle + Math.PI / 2;
+    }
+    getCircleProgressKnobRadius() {
+        return this.props.knobRadius || this.props.side / 2 / this.props.knobRadiusRel;
+    }
+    getCircleProgressPathX() {
+        return (
+            this.getCircleProgressCenter() + this.radius * Math.cos(this.getCircleProgressAngle())
+        );
+    }
+    getCircleProgressPathY() {
+        return (
+            this.getCircleProgressCenter() + this.radius * Math.sin(this.getCircleProgressAngle())
+        );
+    }
+    getCircleProgressPathDirection() {
+        return this.getCircleProgressAngle() < 3 / 2 * Math.PI ? 0 : 1;
+    }
+    getCircleProgressPathD() {
+        let parts = [];
+        parts.push("M" + this.getCircleProgressCenter());
+        parts.push(this.getCircleProgressCenter() + this.radius);
+        parts.push("A");
+        parts.push(this.radius);
+        parts.push(this.radius);
+        parts.push(0);
+        parts.push(this.getCircleProgressPathDirection());
+        parts.push(1);
+        parts.push(this.getCircleProgressPathX());
+        parts.push(this.getCircleProgressPathY());
+        return parts.join(" ");
+    }
     render() {
-        const { radius, circleWidth, progressWidth, knobRadius, value } = this.props;
-        const p = 2 * Math.PI * (radius - circleWidth / 2);
-        const viewBoxPadding = knobRadius + 10;
-        const strokeWidthCircle = circleWidth;
-        const strokeWidthProgress = progressWidth;
-        const strokeDashoffset = p * (1 - value);
-        const strokeDasharray = p;
+        const { side, progressColor, knobColor, circleColor } = this.props;
         return (
             <svg
-                className="m-circular-slider"
                 ref={potar => (this.potar = potar)}
-                viewBox={`0 0 ${radius * 2} ${radius * 2}`}
-                onMouseDown={this.handleMouseDown}
+                width={`${side}px`}
+                height={`${side}px`}
+                viewBox={`0 0 ${side} ${side}`}
             >
-                <circle
-                    className="m-circular-slider__circle"
-                    style={{ strokeWidth: strokeWidthCircle }}
-                    r={radius - circleWidth / 2}
-                    cx={radius}
-                    cy={radius}
-                />
-                <circle
-                    className="m-circular-slider__progress"
-                    style={{
-                        strokeWidth: strokeWidthProgress,
-                        strokeDashoffset,
-                        strokeDasharray
-                    }}
-                    r={radius - circleWidth / 2}
-                    cx={radius}
-                    cy={radius}
-                />
-                <circle
-                    className="m-circular-slider__knob"
-                    r={knobRadius}
-                    cx={radius}
-                    cy={radius * 2 - strokeWidthProgress / 4}
-                />
+                <g>
+                    <circle
+                        style={{
+                            strokeWidth: this.getCircleProgressMainCircleStrokeWidth(),
+                            stroke: circleColor,
+                            fill: "none"
+                        }}
+                        r={this.radius}
+                        cx={this.getCircleProgressCenter()}
+                        cy={this.getCircleProgressCenter()}
+                    />
+                    <path
+                        style={{
+                            strokeWidth: this.getCircleProgressMainProgressStrokeWidth(),
+                            stroke: progressColor,
+                            fill: "none"
+                        }}
+                        d={this.getCircleProgressPathD()}
+                    />
+                    <circle
+                        style={{ fill: knobColor }}
+                        r={this.getCircleProgressKnobRadius()}
+                        cx={this.getCircleProgressPathX()}
+                        cy={this.getCircleProgressPathY()}
+                    />
+                </g>
             </svg>
         );
     }
 }
+
+CircularSlider.defaultProps = {
+    side: 100,
+    value: 0,
+    angle: 2,
+    circleColor: "#243648",
+    progressColor: "#eb213a",
+    knobColor: "#eb213a",
+    circleWidthRel: 20,
+    progressWidthRel: 10,
+    knobRadiusRel: 7
+};
+
+CircularSlider.propTypes = {
+    side: PropTypes.number,
+    circleWidth: PropTypes.number,
+    progressWidth: PropTypes.number,
+    knobRadius: PropTypes.number,
+    value: PropTypes.number,
+    circleColor: PropTypes.string,
+    progressColor: PropTypes.string,
+    knobColor: PropTypes.string
+};
