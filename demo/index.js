@@ -5,9 +5,7 @@ import "./style.scss";
 
 ReactDOM.render(
     <div>
-        <CircularSlider
-            value={0.25}
-        />
+        <CircularSlider />
     </div>,
     document.getElementById("root")
 );

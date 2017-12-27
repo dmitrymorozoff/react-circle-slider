@@ -8,7 +8,13 @@
     "dev": "webpack-dev-server --progress --colors",
     "build": "rm -rf lib && webpack --config webpack.config.prod.js"
   },
-  "keywords": ["react-slider", "round-slider", "circle-slider", "slider", "circular-slider"],
+  "keywords": [
+    "react-slider",
+    "round-slider",
+    "circle-slider",
+    "slider",
+    "circular-slider"
+  ],
   "author": "Morozov Dmitry <dimemorozovy@yandex.ru>",
   "license": "MIT",
   "devDependencies": {
