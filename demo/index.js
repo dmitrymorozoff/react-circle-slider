@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { CircularSlider } from "../source/index";
+import { App } from "./App.js";
+
 import "./style.scss";
 
 ReactDOM.render(
     <div>
-        <CircularSlider />
+        <App />
     </div>,
     document.getElementById("root")
 );

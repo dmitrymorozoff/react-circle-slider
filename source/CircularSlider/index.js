@@ -39,6 +39,7 @@ export class CircularSlider extends Component {
             angle,
             currentStepValue: this.circularSliderHelper.getCurrentStep()
         });
+        this.props.onChange(this.circularSliderHelper.getCurrentStep());
     };
     updateSlider = () => {
         const angle = this.mouseHelper.getNewSliderAngle();
@@ -63,12 +64,12 @@ export class CircularSlider extends Component {
     };
     getCircleProgressMainCircleStrokeWidth = () => {
         return this.props.circleWidth === undefined
-            ? this.props.size / 2 / this.props.circleWidthRel
+            ? this.props.size / 2 / this.props.circleWidthInit
             : this.props.circleWidth;
     };
     getCircleProgressMainProgressStrokeWidth = () => {
         return this.props.progressWidth === undefined
-            ? this.props.size / 2 / this.props.progressWidthRel
+            ? this.props.size / 2 / this.props.progressWidthInit
             : this.props.progressWidth;
     };
     getCircleProgressCenter = () => {
@@ -159,7 +160,8 @@ CircularSlider.propTypes = {
     max: PropTypes.number,
     circleColor: PropTypes.string,
     progressColor: PropTypes.string,
-    knobColor: PropTypes.string
+    knobColor: PropTypes.string,
+    onChange: PropTypes.func
 };
 
 CircularSlider.defaultProps = {
@@ -168,10 +170,11 @@ CircularSlider.defaultProps = {
     circleColor: "#243648",
     progressColor: "#eb213a",
     knobColor: "#eb213a",
-    circleWidthRel: 20,
-    progressWidthRel: 10,
+    circleWidthInit: 20,
+    progressWidthInit: 10,
     knobRadiusRel: 7,
     stepSize: 1,
     min: 0,
-    max: 100
+    max: 100,
+    onChange: () => {}
 };
