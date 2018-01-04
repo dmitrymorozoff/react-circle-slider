@@ -79,7 +79,7 @@ export class CircularSlider extends Component {
         return this.state.angle + Math.PI / 2;
     };
     getCircleProgressKnobRadius = () => {
-        return this.props.knobRadius || this.props.size / 2 / this.props.knobRadiusRel;
+        return this.props.knobRadius || this.props.size / 2 / this.props.knobRadiusInit;
     };
     getCircleProgressPathX = () => {
         return (
@@ -172,7 +172,7 @@ CircularSlider.defaultProps = {
     knobColor: "#eb213a",
     circleWidthInit: 20,
     progressWidthInit: 10,
-    knobRadiusRel: 7,
+    knobRadiusInit: 7,
     stepSize: 1,
     min: 0,
     max: 100,

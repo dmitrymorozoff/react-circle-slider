@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --colors",
-    "build": "rm -rf lib && webpack --config webpack.config.prod.js"
+    "build": "rimraf lib && webpack --config webpack.config.prod.js"
   },
   "keywords": [
     "react-slider",
@@ -40,5 +40,8 @@
     "style-loader": "^0.16.1",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "rimraf": "^2.6.2"
   }
 }
