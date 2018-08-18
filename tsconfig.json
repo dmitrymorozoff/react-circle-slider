@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "moduleResolution": "node",
+        "target": "esnext",
+        "downlevelIteration": true,
+        "strict": true,
+        "strictFunctionTypes": false,
+        "types": ["node"],
+        "sourceMap": true,
+        "allowJs": true,
+        "allowUnreachableCode": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "baseUrl": "./src",
+        "skipLibCheck": true
+    },
+    "exclude": ["node_modules", "dist"],
+    "compileOnSave": false
+}

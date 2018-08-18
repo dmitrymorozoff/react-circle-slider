@@ -1,47 +1,60 @@
 {
-  "name": "react-circular-slider",
-  "version": "1.0.0",
-  "description": "circular slider on react",
-  "main": "./lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress --colors",
-    "build": "rimraf lib && webpack --config webpack.config.prod.js"
-  },
-  "keywords": [
-    "react-slider",
-    "round-slider",
-    "circle-slider",
-    "slider",
-    "circular-slider"
-  ],
-  "author": "Morozov Dmitry <dimemorozovy@yandex.ru>",
-  "license": "MIT",
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^19.0.0",
-    "babel-loader": "^7.0.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.0",
-    "enzyme": "^2.8.2",
-    "identity-obj-proxy": "^3.0.0",
-    "node-sass": "^4.9.3",
-    "react": "^16.0.0",
-    "react-addons-test-utils": "^15.5.1",
-    "react-dom": "^16.0.0",
-    "react-hot-loader": "^1.3.1",
-    "regenerator-runtime": "^0.10.5",
-    "sass-loader": "^6.0.3",
-    "style-loader": "^0.16.1",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.9.7"
-  },
-  "dependencies": {
-    "rimraf": "^2.6.2"
-  }
+    "name": "react-circular-slider",
+    "version": "1.0.0",
+    "description": "circular slider on react",
+    "main": "./lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "webpack-dev-server --mode development --progress --colors",
+        "build": "rimraf lib && webpack --config webpack.config.prod.js",
+        "prettier": "prettier --config .prettierrc.json --write src/**/*.ts",
+        "lint": "tslint -c tslint.json 'src/**/*.ts' 'tests/**/*.spec.ts'"
+    },
+    "keywords": [
+        "react-slider",
+        "round-slider",
+        "circle-slider",
+        "slider",
+        "circular-slider"
+    ],
+    "author": "Morozov Dmitry <dimemorozovy@yandex.ru>",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/react": "^16.4.11",
+        "@types/react-dom": "^16.0.7",
+        "babel": "^6.23.0",
+        "babel-core": "^6.26.3",
+        "babel-eslint": "^7.2.3",
+        "babel-jest": "^19.0.0",
+        "babel-loader": "^7.0.0",
+        "babel-polyfill": "^6.23.0",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "babel-preset-stage-0": "^6.24.1",
+        "css-loader": "^0.28.0",
+        "enzyme": "^2.8.2",
+        "html-webpack-plugin": "^3.2.0",
+        "identity-obj-proxy": "^3.0.0",
+        "node-sass": "^4.9.3",
+        "prettier": "^1.14.2",
+        "react": "^16.0.0",
+        "react-addons-test-utils": "^15.5.1",
+        "react-dom": "^16.0.0",
+        "react-hot-loader": "^1.3.1",
+        "regenerator-runtime": "^0.10.5",
+        "sass-loader": "^6.0.3",
+        "source-map-loader": "^0.2.4",
+        "style-loader": "^0.16.1",
+        "ts-loader": "^4.5.0",
+        "tslint": "^5.11.0",
+        "typescript": "^3.0.1",
+        "webpack": "^4.16.5",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-middleware": "^3.1.3",
+        "webpack-dev-server": "^3.1.5",
+        "webpack-hot-middleware": "^2.22.3"
+    },
+    "dependencies": {
+        "rimraf": "^2.6.2"
+    }
 }

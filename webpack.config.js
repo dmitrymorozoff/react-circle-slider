@@ -1,42 +1,33 @@
-var path = require("path");
-var webpack = require("webpack");
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: "./demo/index.js",
-    output: {
-        path: __dirname,
-        filename: "index.js",
-        publicPath: "/static/",
+    entry: {
+        app: ["./demo/App.tsx", "webpack-hot-middleware/client"],
+        vendor: ["react", "react-dom"],
     },
-    resolveLoader: {
-        moduleExtensions: ["-loader"],
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "js/[name].bundle.js",
+    },
+    devtool: "source-map",
+    resolve: {
+        extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
     },
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.js$/,
-                loaders: ["react-hot"],
-                include: [path.join(__dirname, "./source"), path.join(__dirname, "./demo")],
+                test: /\.(ts|tsx)$/,
+                loader: "ts-loader",
             },
-            {
-                test: /\.js$/,
-                loader: "babel",
-                include: [path.join(__dirname, "./source"), path.join(__dirname, "./demo")],
-            },
-            {
-                test: /\.html$/,
-                loader: "file?name=[name].html",
-            },
-            {
-                test: /\.scss$/,
-                loader: "style-loader!css-loader?minimize!sass-loader",
-                include: [path.join(__dirname, "./source"), path.join(__dirname, "./demo")],
-            },
-            {
-                test: /\.css$/,
-                loader: "style-loader!css-loader?minimize",
-                include: [path.join(__dirname, "./source"), path.join(__dirname, "./demo")],
-            },
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
         ],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "demo", "index.html"),
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+    ],
 };
