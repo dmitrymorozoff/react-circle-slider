@@ -1,6 +1,6 @@
 import * as React from "react";
-import { MouseHelper } from "./helpers/mouse-helper";
 import { CircularSliderHelper } from "./helpers/circular-slider-helper";
+import { MouseHelper } from "./helpers/mouse-helper";
 
 interface IProps {
     size?: number;
@@ -14,7 +14,7 @@ interface IProps {
     circleColor?: string;
     progressColor?: string;
     knobColor?: string;
-    onChange?: any;
+    onChange: ((value?: number) => void);
     circleWidthInit?: number;
     knobRadiusInit?: number;
     progressWidthInit?: number;
@@ -26,18 +26,10 @@ interface IState {
 }
 
 export class CircularSlider extends React.Component<IProps, IState> {
-    private maxLineWidth: number;
-    private radius: number;
-    private stepsCount: number;
-    private stepsArray: number[];
-    private circularSliderHelper: CircularSliderHelper;
-    private mouseHelper!: MouseHelper;
-    private svg: any;
-
-    static defaultProps = {
+    public static defaultProps: Partial<IProps> = {
+        circleColor: "#EDEDED",
         size: 100,
         value: 0,
-        circleColor: "#EDEDED",
         progressColor: "#ADA1FB",
         knobColor: "#ADA1FB",
         circleWidthInit: 9,
@@ -46,8 +38,15 @@ export class CircularSlider extends React.Component<IProps, IState> {
         stepSize: 1,
         min: 0,
         max: 100,
-        onChange: () => {},
+        onChange: () => ({}),
     };
+    private maxLineWidth: number;
+    private radius: number;
+    private stepsCount: number;
+    private stepsArray: number[];
+    private circularSliderHelper: CircularSliderHelper;
+    private mouseHelper!: MouseHelper;
+    private svg: any;
 
     constructor(props: IProps) {
         super(props);
@@ -80,7 +79,7 @@ export class CircularSlider extends React.Component<IProps, IState> {
         );
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         this.mouseHelper = new MouseHelper(this.svg);
         this.setState({
             angle: this.circularSliderHelper.getAngle(),
@@ -88,7 +87,7 @@ export class CircularSlider extends React.Component<IProps, IState> {
         });
     }
 
-    updateAngle = (angle: number) => {
+    public updateAngle = (angle: number) => {
         this.circularSliderHelper.updateCurrentStepFromAngle(angle);
         const currentStep = this.circularSliderHelper.getCurrentStep();
         this.setState({
@@ -98,54 +97,54 @@ export class CircularSlider extends React.Component<IProps, IState> {
         this.props.onChange(currentStep);
     };
 
-    updateSlider = () => {
+    public updateSlider = () => {
         const angle = this.mouseHelper.getNewSliderAngle();
         if (Math.abs(angle - this.state.angle) < Math.PI) {
             this.updateAngle(angle);
         }
     };
 
-    getMainCircleStrokeWidth = () => {
+    public getMainCircleStrokeWidth = () => {
         const { circleWidth, circleWidthInit, size } = this.props;
         return circleWidth === undefined
             ? size! / 2 / circleWidthInit!
             : circleWidth;
     };
 
-    getMainProgressStrokeWidth = () => {
+    public getMainProgressStrokeWidth = () => {
         const { progressWidth, progressWidthInit, size } = this.props;
         return progressWidth === undefined
             ? size! / 2 / progressWidthInit!
             : progressWidth;
     };
 
-    getCenter = () => {
+    public getCenter = () => {
         return this.props.size! / 2;
     };
 
-    getAngle = () => {
+    public getAngle = () => {
         return this.state.angle + Math.PI / 2;
     };
 
-    getKnobRadius = () => {
+    public getKnobRadius = () => {
         const { knobRadius, knobRadiusInit, size } = this.props;
         return knobRadius || size! / 2 / knobRadiusInit!;
     };
 
-    getPathX = () => {
+    public getPathX = () => {
         return this.getCenter() + this.radius * Math.cos(this.getAngle());
     };
 
-    getPathY = () => {
+    public getPathY = () => {
         return this.getCenter() + this.radius * Math.sin(this.getAngle());
     };
 
-    getPathDirection = () => {
+    public getPathDirection = () => {
         return this.getAngle() < (3 / 2) * Math.PI ? 0 : 1;
     };
 
-    getCurve = () => {
-        let points = [];
+    public getCurve = () => {
+        const points = [];
         const center = this.getCenter();
         points.push("M" + center);
         points.push(center + this.radius);
@@ -160,25 +159,25 @@ export class CircularSlider extends React.Component<IProps, IState> {
         return points.join(" ");
     };
 
-    handleMouseMove = (event: Event) => {
+    public handleMouseMove = (event: Event) => {
         event.preventDefault();
         this.mouseHelper.setNewPosition(event);
         this.updateSlider();
     };
 
-    handleMouseUp = (event: Event) => {
+    public handleMouseUp = (event: Event) => {
         event.preventDefault();
         window.removeEventListener("mousemove", this.handleMouseMove);
         window.removeEventListener("mouseup", this.handleMouseUp);
     };
 
-    handleMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
+    public handleMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
         event.preventDefault();
         window.addEventListener("mousemove", this.handleMouseMove);
         window.addEventListener("mouseup", this.handleMouseUp);
     };
 
-    render() {
+    public render() {
         const { size, progressColor, knobColor, circleColor } = this.props;
         return (
             <svg

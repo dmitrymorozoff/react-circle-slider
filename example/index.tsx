@@ -1,5 +1,5 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { CircularSlider } from "../src/circular-slider";
 
 interface IState {
@@ -11,13 +11,16 @@ export class App extends React.Component<{}, IState> {
         super(props);
         this.state = { value: 0 };
     }
-    handleChange = (value: any) => {
+    public handleChange = (value: any) => {
         this.setState({ value });
     };
 
-    handleChangle = () => {};
+    public handleChangle = (value: number) => {
+        // tslint:disable-next-line:no-console
+        console.log(`Changed value ${value}`);
+    };
 
-    render() {
+    public render() {
         return (
             <div>
                 <CircularSlider
