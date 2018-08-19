@@ -1,7 +1,6 @@
-import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { CircularSlider } from "../src";
-declare let module: any;
+import * as React from "react";
+import { CircularSlider } from "../src/circular-slider";
 
 interface IState {
     value: number;
@@ -33,13 +32,4 @@ export class App extends React.Component<{}, IState> {
     }
 }
 
-ReactDOM.render(
-    <div>
-        <App />
-    </div>,
-    document.getElementById("root"),
-);
-
-if (module.hot) {
-    module.hot.accept();
-}
+ReactDOM.render(<App />, document.getElementById("root"));
