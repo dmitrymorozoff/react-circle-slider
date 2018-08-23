@@ -3,8 +3,9 @@
 .DS_Store
 
 # Build files
-styleguide
-dist
+/styleguide/
+/dist/
+/build/
 .cache
 
 # Development stuff
