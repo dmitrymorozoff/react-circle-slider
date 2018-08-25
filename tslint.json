@@ -64,4 +64,7 @@
         "jsx-no-multiline-js": false,
         "no-default-export": true
     }
+    "exclude": [
+        "./lib/__tests__"
+    ]
 }

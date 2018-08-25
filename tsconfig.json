@@ -17,6 +17,6 @@
         "baseUrl": "./src",
         "skipLibCheck": true
     },
-    "exclude": ["node_modules", "dist"],
+    "exclude": ["node_modules", "dist", "**/__test*", "**/*.test.ts"],
     "compileOnSave": false
 }
