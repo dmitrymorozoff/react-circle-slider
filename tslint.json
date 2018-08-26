@@ -1,7 +1,13 @@
 {
     "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
     "linterOptions": {
-        "exclude": ["node_modules/**"]
+        "exclude": [
+            "node_modules/**",
+            "**/*.spec.ts",
+            "**/*.spec.tsx",
+            "**/*.test.ts",
+            "**/*.test.tsx"
+        ]
     },
     "rules": {
         "triple-equals": true,
@@ -64,7 +70,4 @@
         "jsx-no-multiline-js": false,
         "no-default-export": true
     }
-    "exclude": [
-        "./lib/__tests__"
-    ]
 }
