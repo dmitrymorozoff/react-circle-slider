@@ -1,7 +1,6 @@
 import * as React from "react";
 import { CircularSlider } from "../circular-slider";
 import { shallow, mount } from "enzyme";
-import { spy } from "sinon";
 
 describe("circular slider", () => {
     const props = {
@@ -43,6 +42,37 @@ describe("circular slider", () => {
     it("circular slider should call onChange", () => {
         const circularSlider = shallow(<CircularSlider {...this.props} />);
         (circularSlider.instance() as any).updateAngle();
+
         expect(props.onChange).toHaveBeenCalled;
+    });
+
+    it("circular slider should call onChange", () => {
+        const circularSlider = shallow(<CircularSlider {...this.props} />);
+        (circularSlider.instance() as any).updateAngle();
+
+        expect(props.onChange).toHaveBeenCalled;
+    });
+
+    it("circular slider should call mouseDown", () => {
+        const circularSlider = shallow(<CircularSlider {...this.props} />);
+        circularSlider.simulate("mousedown", {
+            preventDefault: () => {},
+        });
+
+        expect(circularSlider.state("angle")).toEqual(0);
+        expect(circularSlider.state("currentStepValue")).toEqual(0);
+    });
+
+    it("circular slider current step value to be equals 5", () => {
+        const circularSlider = shallow(<CircularSlider {...this.props} />);
+        const instance = circularSlider.instance() as any;
+        instance.updateAngle(0.3125);
+
+        expect(circularSlider.state("currentStepValue")).toEqual(5);
+    });
+
+    it("should render a default circular slider", () => {
+        const circularSlider = shallow(<CircularSlider {...this.props} />);
+        expect(circularSlider).toMatchSnapshot();
     });
 });

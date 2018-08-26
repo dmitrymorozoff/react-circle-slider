@@ -20,13 +20,6 @@
     ],
     "author": "Morozov Dmitry <dimemorozovy@yandex.ru>",
     "license": "MIT",
-    "jest": {
-        "globals": {
-            "ts-jest": {
-                "useBabelrc": true
-            }
-        }
-    },
     "devDependencies": {
         "@types/enzyme": "^3.1.13",
         "@types/enzyme-adapter-react-16": "^1.0.3",
