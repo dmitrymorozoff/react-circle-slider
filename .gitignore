@@ -64,3 +64,5 @@ fabric.properties
 logs
 *.log
 npm-debug.log*
+
+/coverage/

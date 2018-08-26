@@ -10,6 +10,9 @@ export class MouseHelper {
     }
 
     public setNewPosition(event: any) {
+        if (!this.container) {
+            return;
+        }
         const rectSize = this.container.getBoundingClientRect();
         const width = rectSize.width;
         this.center = width / 2;
