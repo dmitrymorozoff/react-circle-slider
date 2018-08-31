@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { CircularSlider } from "../src/circular-slider";
+import { CircleSlider } from "../src/circle-slider";
 
 interface IState {
     value: number;
@@ -23,7 +23,7 @@ export class App extends React.Component<{}, IState> {
     public render() {
         return (
             <div>
-                <CircularSlider
+                <CircleSlider
                     value={this.state.value}
                     onChange={this.handleChange}
                 />

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CircularSliderHelper } from "./helpers/circular-slider-helper";
+import { CircleSliderHelper } from "./helpers/circle-slider-helper";
 import { MouseHelper } from "./helpers/mouse-helper";
 
 interface IProps {
@@ -25,7 +25,7 @@ interface IState {
     currentStepValue: number;
 }
 
-export class CircularSlider extends React.Component<IProps, IState> {
+export class CircleSlider extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {
         circleColor: "#EDEDED",
         size: 100,
@@ -44,7 +44,7 @@ export class CircularSlider extends React.Component<IProps, IState> {
     private radius: number;
     private stepsCount: number;
     private stepsArray: number[];
-    private circularSliderHelper: CircularSliderHelper;
+    private circleSliderHelper: CircleSliderHelper;
     private mouseHelper!: MouseHelper;
     private svg: any;
 
@@ -73,7 +73,7 @@ export class CircularSlider extends React.Component<IProps, IState> {
             },
             (v, i) => min! + i * stepSize!,
         );
-        this.circularSliderHelper = new CircularSliderHelper(
+        this.circleSliderHelper = new CircleSliderHelper(
             this.stepsArray,
             value,
         );
@@ -82,14 +82,14 @@ export class CircularSlider extends React.Component<IProps, IState> {
     public componentDidMount() {
         this.mouseHelper = new MouseHelper(this.svg);
         this.setState({
-            angle: this.circularSliderHelper.getAngle(),
-            currentStepValue: this.circularSliderHelper.getCurrentStep(),
+            angle: this.circleSliderHelper.getAngle(),
+            currentStepValue: this.circleSliderHelper.getCurrentStep(),
         });
     }
 
     public updateAngle = (angle: number) => {
-        this.circularSliderHelper.updateCurrentStepFromAngle(angle);
-        const currentStep = this.circularSliderHelper.getCurrentStep();
+        this.circleSliderHelper.updateCurrentStepFromAngle(angle);
+        const currentStep = this.circleSliderHelper.getCurrentStep();
         this.setState({
             angle,
             currentStepValue: currentStep,

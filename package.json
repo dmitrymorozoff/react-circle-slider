@@ -1,15 +1,16 @@
 {
-    "name": "react-circular-slider",
+    "name": "react-circle-slider",
     "version": "1.0.0",
-    "description": "Circular Slider UI component for React",
+    "description": "Circle Slider UI component for React",
     "main": "./dist/index.js",
     "scripts": {
-        "dev": "./node_modules/.bin/parcel --no-cache example/index.html",
-        "build": "./node_modules/.bin/webpack --mode production",
+        "dev": "parcel --no-cache example/index.html",
+        "build": "npm run test && npm run lint && npm run clean && webpack --mode production && parcel build --no-cache --public-url ./ example/index.html",
         "prettier": "prettier --config .prettierrc.json --write src/**/*.ts",
         "lint": "tslint -c tslint.json 'src/**/*.ts' 'tests/**/*.spec.ts'",
         "test:watch": "jest --watch",
-        "test": "jest"
+        "test": "jest",
+        "clean": "rimraf lib && rimraf dist"
     },
     "keywords": [
         "react-slider",

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`circular slider should render a default circular slider 1`] = `
+exports[`circle slider should render a default circle slider 1`] = `
 <svg
   height="100px"
   onMouseDown={[Function]}

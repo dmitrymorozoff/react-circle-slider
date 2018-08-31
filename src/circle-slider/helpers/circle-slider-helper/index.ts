@@ -1,4 +1,4 @@
-export class CircularSliderHelper {
+export class CircleSliderHelper {
     private stepsArray: number[];
     private currentStepIndex: number;
     private countSteps: number;
