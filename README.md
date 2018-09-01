@@ -11,6 +11,10 @@ Circle Slider Component for React
 -   Defining step size
 -   Style based: no images / SVGs
 
+## Examples
+
+-   To check out live examples visit https://dmitrymorozoff.github.io/react-circle-slider/
+
 ## Installation
 
 ```bash
