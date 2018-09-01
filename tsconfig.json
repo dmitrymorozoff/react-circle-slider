@@ -14,9 +14,15 @@
         "emitDecoratorMetadata": true,
         "jsx": "react",
         "noUnusedLocals": true,
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "skipLibCheck": true
     },
-    "exclude": ["node_modules", "dist"],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "**/*.spec.tsx",
+        "**/*.test.ts",
+        "**/*.test.tsx"
+    ],
     "compileOnSave": false
 }

@@ -1,4 +1,4 @@
-export class CircularSliderHelper {
+export class CircleSliderHelper {
     private stepsArray: number[];
     private currentStepIndex: number;
     private countSteps: number;
@@ -15,22 +15,22 @@ export class CircularSliderHelper {
         });
     }
 
-    getAnglePoint() {
+    public getAnglePoint() {
         return (Math.PI * 2) / this.countSteps;
     }
 
-    getAngle() {
+    public getAngle() {
         return Math.min(
             this.getAnglePoint() * this.currentStepIndex,
             Math.PI * 2 - Number.EPSILON,
         );
     }
 
-    getCurrentStep() {
+    public getCurrentStep() {
         return this.stepsArray[this.currentStepIndex];
     }
 
-    updateCurrentStepFromValue(value: number) {
+    public updateCurrentStepFromValue(value: number) {
         for (let i = 0; i < this.countSteps; i++) {
             if (value <= this.stepsArray[i]) {
                 this.currentStepIndex = i;
@@ -40,7 +40,7 @@ export class CircularSliderHelper {
         this.currentStepIndex = this.countSteps - 1;
     }
 
-    updateCurrentStepFromAngle(angle: number) {
+    public updateCurrentStepFromAngle(angle: number) {
         const stepIndex = Math.floor(angle / this.getAnglePoint());
         this.currentStepIndex = Math.min(
             Math.max(stepIndex, 0),

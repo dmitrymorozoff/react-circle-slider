@@ -1,15 +1,16 @@
 const path = require("path");
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
     entry: {
-        app: ["./demo/App.tsx", "webpack-hot-middleware/client"],
-        vendor: ["react", "react-dom"],
+        app: ["./src/index.ts"],
     },
     output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "js/[name].bundle.js",
+        path: path.resolve(__dirname, "./lib"),
+        filename: "index.js",
+        library: "",
+        libraryTarget: "commonjs",
     },
     devtool: "source-map",
     resolve: {
@@ -24,10 +25,16 @@ module.exports = {
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
         ],
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "demo", "index.html"),
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-    ],
+    optimization: {
+        minimizer: [
+            new UglifyWebpackPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    mangle: true,
+                },
+                sourceMap: true,
+            }),
+        ],
+    },
 };

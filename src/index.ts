@@ -1,3 +1,3 @@
-import { CircularSlider } from "./circular-slider";
+import { CircleSlider } from "./circle-slider";
 
-export { CircularSlider };
+export { CircleSlider };

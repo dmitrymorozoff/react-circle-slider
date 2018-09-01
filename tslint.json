@@ -1,0 +1,73 @@
+{
+    "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**",
+            "**/*.spec.ts",
+            "**/*.spec.tsx",
+            "**/*.test.ts",
+            "**/*.test.tsx"
+        ]
+    },
+    "rules": {
+        "triple-equals": true,
+        "no-var-requires": false,
+        "space-before-function-paren": [
+            true,
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always",
+                "method": "never",
+                "constructor": "never"
+            }
+        ],
+        "object-literal-sort-keys": false,
+        "no-debugger": false,
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "public-static-field",
+                    "protected-static-field",
+                    "private-static-field",
+                    "public-instance-field",
+                    "protected-instance-field",
+                    "private-instance-field",
+                    "public-constructor",
+                    "protected-constructor",
+                    "private-constructor",
+                    "public-static-method",
+                    "protected-static-method",
+                    "private-static-method",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method"
+                ]
+            }
+        ],
+        "align": [true, "statements"],
+        "jsx-no-multiline-js": false,
+        "no-default-export": true
+    },
+    "jsRules": {
+        "triple-equals": true,
+        "no-var-requires": false,
+        "space-before-function-paren": [
+            true,
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always",
+                "method": "never",
+                "constructor": "never"
+            }
+        ],
+        "object-literal-sort-keys": false,
+        "no-debugger": false,
+        "no-console": [false],
+        "eofline": false,
+        "jsx-no-multiline-js": false,
+        "no-default-export": true
+    }
+}

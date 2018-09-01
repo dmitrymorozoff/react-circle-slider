@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`circle slider should render a default circle slider 1`] = `
+<svg
+  height="100px"
+  onMouseDown={[Function]}
+  viewBox="0 0 100 100"
+  width="100px"
+>
+  <g>
+    <circle
+      cx={50}
+      cy={50}
+      r={41.666666666666664}
+      style={
+        Object {
+          "fill": "none",
+          "stroke": "#EDEDED",
+          "strokeWidth": 5.555555555555555,
+        }
+      }
+    />
+    <path
+      d="M50 91.66666666666666 A 41.666666666666664 41.666666666666664 0 0 1 50 91.66666666666666"
+      style={
+        Object {
+          "fill": "none",
+          "stroke": "#ADA1FB",
+          "strokeLinecap": "round",
+          "strokeWidth": 7.142857142857143,
+        }
+      }
+    />
+    <circle
+      cx={50}
+      cy={91.66666666666666}
+      r={8.333333333333334}
+      style={
+        Object {
+          "cursor": "pointer",
+          "fill": "#ADA1FB",
+        }
+      }
+    />
+  </g>
+</svg>
+`;

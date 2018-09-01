@@ -1,49 +1,99 @@
-## Использование
+# react-circular-slider
 
-```js
-import React from "react";
-import ReactDOM from "react-dom";
-import { CircularSlider } from "../source/index";
+Circle Slider Component for React
 
-ReactDOM.render(<CircularSlider />, container);
+## Functionality
+
+-   Simple to use
+-   No extra dependencies
+-   Highly customizable
+-   Defining min and max values
+-   Defining step size
+-   Style based: no images / SVGs
+
+## Installation
+
+```bash
+$ npm install --save react-circle-slider
 ```
 
-## Props
+You can also test the components locally by cloning this repo and doing the following steps:
 
-| Свойства          | Тип          | Стандартные | Описание                                                      |
-| ----------------- | :----------- | ----------- | ------------------------------------------------------------- |
-| size              | Number       | 100         | размер SVG элемента в пикселях                                |
-| stepSize          | Number       | 1           | размер шага                                                   |
-| knobRadius        | Number       | null        | радиус ручки в пикселях                                       |
-| knobRadiusInit    | Number       | 7           | относительный радиус ручки слайдера                           |
-| circleWidth       | Number       | null        | точная ширина окружности слайдера                             |
-| circleWidthInit   | Number       | 20          | относительный радиус окружности слайдера                      |
-| progressWidth     | Number       | null        | точная ширина кривой прогресса в пикселях                     |
-| progressWidthInit | Number       | 10          | относительный радиус кривой прогресса                         |
-| min               | Number       | 0           | минимальное значение                                          |
-| max               | Number       | 100         | максимальное значение                                         |
-| value             | Number       | 0           | значение                                                      |
-| circleColor       | String       | `#243648`   | цвет окружности слайдера                                      |
-| progressColor     | String       | `#eb213a`   | цвет кривой прогресса                                         |
-| knobColor         | String       | `#eb213a`   | цвет ручки                                                    |
-| onChange          | Function     | NOOP        | `onChange` будет срабатывать при изменении значения слайдера. |
+## NPM-scripts
 
-## NPM-скрипты
-
-Установка зависимостей:
+Install dependencies from package.json:
 
 ```bash
 $ npm install
 ```
 
-Запуск локального сервера для разработки по адресу `localhost:8080`:
+Start local development server `localhost:8080`:
 
 ```bash
 $ npm run dev
 ```
 
-Сборка библиотеки :
+Run linter
 
 ```bash
-$ npm run build
+$ npm run lint
 ```
+
+Start tests followed by jest
+
+```bash
+$ npm run test
+```
+
+## Usage
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { CircleSlider } from "react-circle-slider";
+
+export class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { value: 0 };
+    }
+
+    handleChange = value => {
+        console.log(`Changed value ${value}`);
+        this.setState({ value });
+    };
+
+    render() {
+        return (
+            <div>
+                <CircleSlider
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                />
+                <div style={{ textAlign: "center", fontFamily: "sans-serif" }}>
+                    {this.state.value}
+                </div>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+
+## Props
+
+| Props           | Type         | Default   | Description                                                    |
+| --------------- | :----------- | --------- | -------------------------------------------------------------- |
+| size            | Number       | 100       | size of the slider in px                                       |
+| stepSize        | Number       | 1         | value to be added or subtracted on each step the slider makes. |
+| knobRadius      | Number       | null      | knob radius in px                                              |
+| circleWidth     | Number       | null      | width of circle in px                                          |
+| progressWidth   | Number       | null      | progress curve width in px                                     |
+| min             | Number       | 0         | the minimum value of the slider                                |
+| max             | Number       | 100       | the maximum value of the slider                                |
+| value           | Number       | 0         | value                                                          |
+| circleColor     | String       | `#243648` | color of slider                                                |
+| progressColor   | String       | `#eb213a` | color of progress curve                                        |
+| knobColor       | String       | `#eb213a` | color of knob                                                  |
+| onChange        | Function     | NOOP      | when slider is moved, `onChange` is triggered.                 |

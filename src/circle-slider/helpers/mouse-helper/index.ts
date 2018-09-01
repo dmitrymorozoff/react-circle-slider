@@ -9,7 +9,10 @@ export class MouseHelper {
         this.setNewPosition({ x: 0, y: 0 });
     }
 
-    setNewPosition(event: any) {
+    public setNewPosition(event: any) {
+        if (!this.container) {
+            return;
+        }
         const rectSize = this.container.getBoundingClientRect();
         const width = rectSize.width;
         this.center = width / 2;
@@ -17,7 +20,7 @@ export class MouseHelper {
         this.relativeY = event.y - rectSize.top;
     }
 
-    getNewSliderAngle() {
+    public getNewSliderAngle() {
         return (
             (Math.atan2(
                 this.relativeY - this.center,
