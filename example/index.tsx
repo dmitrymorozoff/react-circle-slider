@@ -9,26 +9,54 @@ interface IState {
 export class App extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
-        this.state = { value: 0 };
+        this.state = { value: 50 };
     }
     public handleChange = (value: any) => {
+        // tslint:disable-next-line:no-console
+        console.log(`Changed value ${value}`);
         this.setState({ value });
     };
 
-    public handleChangle = (value: number) => {
-        // tslint:disable-next-line:no-console
-        console.log(`Changed value ${value}`);
+    public handleChangeRange = (event: any) => {
+        this.setState({
+            value: event.target.valueAsNumber,
+        });
     };
 
     public render() {
+        const { value } = this.state;
         return (
-            <div>
-                <CircleSlider
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                />
-                <div style={{ textAlign: "center", fontFamily: "sans-serif" }}>
-                    {this.state.value}
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <CircleSlider value={value} onChange={this.handleChange} />
+                <div
+                    style={{
+                        textAlign: "center",
+                        fontFamily: "sans-serif",
+                        marginTop: "0.5rem",
+                    }}
+                >
+                    {value}
+                </div>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: "0.5rem",
+                    }}
+                >
+                    <input
+                        id="control"
+                        type="range"
+                        value={value}
+                        onChange={this.handleChangeRange}
+                    />
                 </div>
             </div>
         );
