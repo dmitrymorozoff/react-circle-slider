@@ -87,6 +87,12 @@ export class CircleSlider extends React.Component<IProps, IState> {
         });
     }
 
+    public componentWillReceiveProps(nextProps: any) {
+        if (this.props.value !== nextProps.value) {
+            this.updateSliderFromProps(nextProps.value);
+        }
+    }
+
     public updateAngle = (angle: number) => {
         this.circleSliderHelper.updateCurrentStepFromAngle(angle);
         const currentStep = this.circleSliderHelper.getCurrentStep();
@@ -102,6 +108,16 @@ export class CircleSlider extends React.Component<IProps, IState> {
         if (Math.abs(angle - this.state.angle) < Math.PI) {
             this.updateAngle(angle);
         }
+    };
+
+    public updateSliderFromProps = (valueFromProps: number) => {
+        const { stepSize } = this.props;
+        const newValue = Math.round(valueFromProps / stepSize!) * stepSize!;
+        this.circleSliderHelper.updateCurrentStepFromValue(newValue);
+        this.setState({
+            angle: this.circleSliderHelper.getAngle(),
+            currentStepValue: newValue,
+        });
     };
 
     public getMainCircleStrokeWidth = () => {

@@ -1,4 +1,4 @@
-# react-circular-slider
+# react-circle-slider
 
 Circle Slider Component for React
 
@@ -67,15 +67,46 @@ export class App extends React.Component {
         this.setState({ value });
     };
 
+    handleChangeRange = event => {
+        this.setState({
+            value: event.target.valueAsNumber,
+        });
+    };
+
     render() {
+        const { value } = this.state;
         return (
-            <div>
-                <CircleSlider
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                />
-                <div style={{ textAlign: "center", fontFamily: "sans-serif" }}>
-                    {this.state.value}
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <CircleSlider value={value} onChange={this.handleChange} />
+                <div
+                    style={{
+                        textAlign: "center",
+                        fontFamily: "sans-serif",
+                        marginTop: "0.5rem",
+                    }}
+                >
+                    {value}
+                </div>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: "0.5rem",
+                    }}
+                >
+                    <input
+                        id="control"
+                        type="range"
+                        value={value}
+                        onChange={this.handleChangeRange}
+                    />
                 </div>
             </div>
         );
@@ -87,17 +118,17 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 ## Props
 
-| Props           | Type         | Default   | Description                                                    |
-| --------------- | :----------- | --------- | -------------------------------------------------------------- |
-| size            | Number       | 100       | size of the slider in px                                       |
-| stepSize        | Number       | 1         | value to be added or subtracted on each step the slider makes. |
-| knobRadius      | Number       | null      | knob radius in px                                              |
-| circleWidth     | Number       | null      | width of circle in px                                          |
-| progressWidth   | Number       | null      | progress curve width in px                                     |
-| min             | Number       | 0         | the minimum value of the slider                                |
-| max             | Number       | 100       | the maximum value of the slider                                |
-| value           | Number       | 0         | value                                                          |
-| circleColor     | String       | `#243648` | color of slider                                                |
-| progressColor   | String       | `#eb213a` | color of progress curve                                        |
-| knobColor       | String       | `#eb213a` | color of knob                                                  |
-| onChange        | Function     | NOOP      | when slider is moved, `onChange` is triggered.                 |
+| Props         | Type     | Default   | Description                                                    |
+| ------------- | :------- | --------- | -------------------------------------------------------------- |
+| size          | Number   | 100       | size of the slider in px                                       |
+| stepSize      | Number   | 1         | value to be added or subtracted on each step the slider makes. |
+| knobRadius    | Number   | null      | knob radius in px                                              |
+| circleWidth   | Number   | null      | width of circle in px                                          |
+| progressWidth | Number   | null      | progress curve width in px                                     |
+| min           | Number   | 0         | the minimum value of the slider                                |
+| max           | Number   | 100       | the maximum value of the slider                                |
+| value         | Number   | 0         | value                                                          |
+| circleColor   | String   | `#243648` | color of slider                                                |
+| progressColor | String   | `#eb213a` | color of progress curve                                        |
+| knobColor     | String   | `#eb213a` | color of knob                                                  |
+| onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
