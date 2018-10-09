@@ -2,7 +2,7 @@
 
 Circle Slider Component for React
 
-![Imgur](https://imgur.com/oDpu1Hd)
+![Imgur](https://i.imgur.com/Mv5IK7D.gif)
 
 ## Functionality
 
