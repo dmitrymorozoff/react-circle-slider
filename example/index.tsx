@@ -12,8 +12,6 @@ export class App extends React.Component<{}, IState> {
         this.state = { value: 50 };
     }
     public handleChange = (value: any) => {
-        // tslint:disable-next-line:no-console
-        console.log(`Changed value ${value}`);
         this.setState({ value });
     };
 
@@ -26,37 +24,117 @@ export class App extends React.Component<{}, IState> {
     public render() {
         const { value } = this.state;
         return (
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <CircleSlider value={value} onChange={this.handleChange} />
-                <div
-                    style={{
-                        textAlign: "center",
-                        fontFamily: "sans-serif",
-                        marginTop: "0.5rem",
-                    }}
-                >
-                    {value}
+            <div className="container">
+                <div className="wrapper">
+                    <CircleSlider value={value} onChange={this.handleChange} />
+                    <div className="title">{value}</div>
+                    <div className="range">
+                        <input
+                            id="control"
+                            type="range"
+                            value={value}
+                            onChange={this.handleChangeRange}
+                        />
+                    </div>
                 </div>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "0.5rem",
-                    }}
-                >
-                    <input
-                        id="control"
-                        type="range"
+                <div className="wrapper">
+                    <CircleSlider
                         value={value}
-                        onChange={this.handleChangeRange}
+                        progressWidth={5}
+                        circleWidth={5}
+                        knobRadius={5}
+                        onChange={this.handleChange}
                     />
+                    <div className="title">{value}</div>
+                    <div className="range">
+                        <input
+                            id="control"
+                            type="range"
+                            value={value}
+                            onChange={this.handleChangeRange}
+                        />
+                    </div>
+                </div>
+                <div className="wrapper">
+                    <CircleSlider
+                        value={value}
+                        progressWidth={10}
+                        circleWidth={5}
+                        knobRadius={8}
+                        size={80}
+                        knobColor="#9D74FC"
+                        progressColor="#9D74FC"
+                        disabled={true}
+                        onChange={this.handleChange}
+                    />
+                    <div className="title">{value}</div>
+                    <div className="range">
+                        <input
+                            id="control"
+                            type="range"
+                            value={value}
+                            onChange={this.handleChangeRange}
+                        />
+                    </div>
+                </div>
+                <div className="wrapper">
+                    <CircleSlider
+                        value={value}
+                        progressWidth={4}
+                        circleWidth={12}
+                        knobRadius={10}
+                        knobColor="#41cb93"
+                        progressColor="#41cb93"
+                        onChange={this.handleChange}
+                    />
+                    <div className="title">{value}</div>
+                    <div className="range">
+                        <input
+                            id="control"
+                            type="range"
+                            value={value}
+                            onChange={this.handleChangeRange}
+                        />
+                    </div>
+                </div>
+                <div className="wrapper">
+                    <CircleSlider
+                        value={value}
+                        progressWidth={12}
+                        circleWidth={5}
+                        size={150}
+                        knobRadius={10}
+                        knobColor="#41cb93"
+                        progressColor="#41cb93"
+                        onChange={this.handleChange}
+                    />
+                    <div className="title">{value}</div>
+                    <div className="range">
+                        <input
+                            id="control"
+                            type="range"
+                            value={value}
+                            onChange={this.handleChangeRange}
+                        />
+                    </div>
+                </div>
+                <div className="wrapper">
+                    <CircleSlider
+                        value={value}
+                        progressWidth={10}
+                        circleWidth={5}
+                        knobRadius={5}
+                        onChange={this.handleChange}
+                    />
+                    <div className="title">{value}</div>
+                    <div className="range">
+                        <input
+                            id="control"
+                            type="range"
+                            value={value}
+                            onChange={this.handleChangeRange}
+                        />
+                    </div>
                 </div>
             </div>
         );

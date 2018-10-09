@@ -18,6 +18,7 @@ interface IProps {
     circleWidthInit?: number;
     knobRadiusInit?: number;
     progressWidthInit?: number;
+    disabled?: boolean;
 }
 
 interface IState {
@@ -38,6 +39,7 @@ export class CircleSlider extends React.Component<IProps, IState> {
         stepSize: 1,
         min: 0,
         max: 100,
+        disabled: false,
         onChange: () => ({}),
     };
     private maxLineWidth: number;
@@ -188,13 +190,21 @@ export class CircleSlider extends React.Component<IProps, IState> {
     };
 
     public handleMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
-        event.preventDefault();
-        window.addEventListener("mousemove", this.handleMouseMove);
-        window.addEventListener("mouseup", this.handleMouseUp);
+        if (!this.props.disabled) {
+            event.preventDefault();
+            window.addEventListener("mousemove", this.handleMouseMove);
+            window.addEventListener("mouseup", this.handleMouseUp);
+        }
     };
 
     public render() {
-        const { size, progressColor, knobColor, circleColor } = this.props;
+        const {
+            size,
+            progressColor,
+            knobColor,
+            circleColor,
+            disabled,
+        } = this.props;
         return (
             <svg
                 ref={svg => (this.svg = svg)}
@@ -226,7 +236,7 @@ export class CircleSlider extends React.Component<IProps, IState> {
                     <circle
                         style={{
                             fill: knobColor,
-                            cursor: "pointer",
+                            cursor: disabled ? "not-allowed" : "pointer",
                         }}
                         r={this.getKnobRadius()}
                         cx={this.getPathX()}
