@@ -2,7 +2,7 @@
 
 Circle Slider Component for React
 
-![slider](https://github.com/dmitrymorozoff/react-circle-slider/assets/slider.gif)
+![Imgur](https://imgur.com/oDpu1Hd)
 
 ## Functionality
 
