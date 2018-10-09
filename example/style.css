@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 650px;
+}
+
+.wrapper {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1.5rem;
+}
+
+.title {
+    text-align: center;
+    font-family: sans-serif;
+    margin-top: 0.5rem;
+}
+
+.range {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+}

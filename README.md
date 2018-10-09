@@ -2,6 +2,8 @@
 
 Circle Slider Component for React
 
+![Imgur](https://i.imgur.com/Mv5IK7D.gif)
+
 ## Functionality
 
 -   Simple to use
@@ -131,4 +133,5 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | circleColor   | String   | `#243648` | color of slider                                                |
 | progressColor | String   | `#eb213a` | color of progress curve                                        |
 | knobColor     | String   | `#eb213a` | color of knob                                                  |
+| disabled      | Boolean  | false     | disabled status                                                |
 | onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
