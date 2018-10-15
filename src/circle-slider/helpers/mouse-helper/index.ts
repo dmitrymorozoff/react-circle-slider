@@ -6,10 +6,10 @@ export class MouseHelper {
 
     constructor(container: any) {
         this.container = container;
-        this.setNewPosition({ x: 0, y: 0 });
+        this.setPosition({ x: 0, y: 0 });
     }
 
-    public setNewPosition(event: any) {
+    public setPosition(event: any): void {
         if (!this.container) {
             return;
         }
@@ -20,14 +20,11 @@ export class MouseHelper {
         this.relativeY = event.y - rectSize.top;
     }
 
-    public getNewSliderAngle() {
-        return (
-            (Math.atan2(
-                this.relativeY - this.center,
-                this.relativeX - this.center,
-            ) +
-                (Math.PI * 3) / 2) %
-            (Math.PI * 2)
+    public getNewSliderAngle(): number {
+        const angleBetweenTwoVectors = Math.atan2(
+            this.relativeY - this.center,
+            this.relativeX - this.center,
         );
+        return (angleBetweenTwoVectors + (3 * Math.PI) / 2) % (2 * Math.PI);
     }
 }

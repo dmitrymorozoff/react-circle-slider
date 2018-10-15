@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CircleSliderHelper } from "./helpers/circle-slider-helper";
+import { generatePath } from "./helpers/generate-path";
 import { MouseHelper } from "./helpers/mouse-helper";
 
 interface IProps {
@@ -19,32 +20,35 @@ interface IProps {
     knobRadiusInit?: number;
     progressWidthInit?: number;
     disabled?: boolean;
+    shadow?: boolean;
 }
 
 interface IState {
     angle: number;
     currentStepValue: number;
+    isMouseMove: boolean;
 }
 
 export class CircleSlider extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {
-        circleColor: "#EDEDED",
-        size: 100,
+        circleColor: "#e9eaee",
+        size: 180,
         value: 0,
-        progressColor: "#ADA1FB",
-        knobColor: "#ADA1FB",
-        circleWidthInit: 9,
-        progressWidthInit: 7,
-        knobRadiusInit: 6,
+        progressColor: "#007aff",
+        knobColor: "#fff",
+        circleWidthInit: 20,
+        progressWidthInit: 5,
+        knobRadiusInit: 5,
         stepSize: 1,
         min: 0,
         max: 100,
         disabled: false,
+        shadow: true,
         onChange: () => ({}),
     };
     private maxLineWidth: number;
     private radius: number;
-    private stepsCount: number;
+    private countSteps: number;
     private stepsArray: number[];
     private circleSliderHelper: CircleSliderHelper;
     private mouseHelper!: MouseHelper;
@@ -55,6 +59,7 @@ export class CircleSlider extends React.Component<IProps, IState> {
         this.state = {
             angle: 0,
             currentStepValue: 0,
+            isMouseMove: false,
         };
 
         this.maxLineWidth = Math.max(
@@ -68,13 +73,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
 
         const { min, max, stepSize, value } = this.props;
 
-        this.stepsCount = 1 + (max! - min!) / stepSize!;
-        this.stepsArray = Array.from(
-            {
-                length: this.stepsCount,
-            },
-            (v, i) => min! + i * stepSize!,
-        );
+        this.countSteps = 1 + (max! - min!) / stepSize!;
+        this.stepsArray = this.getStepsArray(min!, stepSize!);
+
         this.circleSliderHelper = new CircleSliderHelper(
             this.stepsArray,
             value,
@@ -90,13 +91,13 @@ export class CircleSlider extends React.Component<IProps, IState> {
     }
 
     public componentWillReceiveProps(nextProps: any) {
-        if (this.props.value !== nextProps.value) {
+        if (this.props.value !== nextProps.value && !this.state.isMouseMove) {
             this.updateSliderFromProps(nextProps.value);
         }
     }
 
-    public updateAngle = (angle: number) => {
-        this.circleSliderHelper.updateCurrentStepFromAngle(angle);
+    public updateAngle = (angle: number): void => {
+        this.circleSliderHelper.updateStepIndexFromAngle(angle);
         const currentStep = this.circleSliderHelper.getCurrentStep();
         this.setState({
             angle,
@@ -105,91 +106,98 @@ export class CircleSlider extends React.Component<IProps, IState> {
         this.props.onChange(currentStep);
     };
 
-    public updateSlider = () => {
+    public updateSlider = (): void => {
         const angle = this.mouseHelper.getNewSliderAngle();
         if (Math.abs(angle - this.state.angle) < Math.PI) {
             this.updateAngle(angle);
         }
     };
 
-    public updateSliderFromProps = (valueFromProps: number) => {
+    public updateSliderFromProps = (valueFromProps: number): void => {
         const { stepSize } = this.props;
         const newValue = Math.round(valueFromProps / stepSize!) * stepSize!;
-        this.circleSliderHelper.updateCurrentStepFromValue(newValue);
+        this.circleSliderHelper.updateStepIndexFromValue(newValue);
         this.setState({
             angle: this.circleSliderHelper.getAngle(),
             currentStepValue: newValue,
         });
     };
 
-    public getMainCircleStrokeWidth = () => {
+    public getMainCircleStrokeWidth = (): number => {
         const { circleWidth, circleWidthInit, size } = this.props;
         return circleWidth === undefined
             ? size! / 2 / circleWidthInit!
             : circleWidth;
     };
 
-    public getMainProgressStrokeWidth = () => {
+    public getMainProgressStrokeWidth = (): number => {
         const { progressWidth, progressWidthInit, size } = this.props;
         return progressWidth === undefined
             ? size! / 2 / progressWidthInit!
             : progressWidth;
     };
 
-    public getCenter = () => {
+    public getCenter = (): number => {
         return this.props.size! / 2;
     };
 
-    public getAngle = () => {
+    public getAngle = (): number => {
         return this.state.angle + Math.PI / 2;
     };
 
-    public getKnobRadius = () => {
+    public getKnobRadius = (): number => {
         const { knobRadius, knobRadiusInit, size } = this.props;
         return knobRadius || size! / 2 / knobRadiusInit!;
     };
 
-    public getPathX = () => {
+    public getPathX = (): number => {
         return this.getCenter() + this.radius * Math.cos(this.getAngle());
     };
 
-    public getPathY = () => {
+    public getPathY = (): number => {
         return this.getCenter() + this.radius * Math.sin(this.getAngle());
     };
 
-    public getPathDirection = () => {
+    public getPathDirection = (): number => {
         return this.getAngle() < (3 / 2) * Math.PI ? 0 : 1;
     };
 
-    public getCurve = () => {
-        const points = [];
-        const center = this.getCenter();
-        points.push("M" + center);
-        points.push(center + this.radius);
-        points.push("A");
-        points.push(this.radius);
-        points.push(this.radius);
-        points.push(0);
-        points.push(this.getPathDirection());
-        points.push(1);
-        points.push(this.getPathX());
-        points.push(this.getPathY());
-        return points.join(" ");
+    public getStepsArray = (min: number, stepSize: number): number[] => {
+        const stepArray = [];
+        for (let i = 0; i < this.countSteps; i++) {
+            stepArray.push(min + i * stepSize);
+        }
+        return stepArray;
     };
 
-    public handleMouseMove = (event: Event) => {
+    public getPath = (): string => {
+        const center = this.getCenter();
+        const direction = this.getPathDirection();
+        const pathX = this.getPathX();
+        const pathY = this.getPathY();
+        const path = generatePath(center, this.radius, direction, pathX, pathY);
+        return path;
+    };
+
+    public handleMouseMove = (event: Event): void => {
         event.preventDefault();
-        this.mouseHelper.setNewPosition(event);
+        this.setState({
+            isMouseMove: true,
+        });
+        this.mouseHelper.setPosition(event);
         this.updateSlider();
     };
 
-    public handleMouseUp = (event: Event) => {
+    public handleMouseUp = (event: Event): void => {
         event.preventDefault();
+        this.setState({
+            isMouseMove: false,
+        });
         window.removeEventListener("mousemove", this.handleMouseMove);
         window.removeEventListener("mouseup", this.handleMouseUp);
     };
 
-    public handleMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
+    public handleMouseDown = (event: React.MouseEvent<SVGSVGElement>): void => {
         if (!this.props.disabled) {
             event.preventDefault();
             window.addEventListener("mousemove", this.handleMouseMove);
@@ -204,7 +212,10 @@ export class CircleSlider extends React.Component<IProps, IState> {
             knobColor,
             circleColor,
             disabled,
+            shadow,
         } = this.props;
+        const offset = shadow ? "5px" : "0px";
+
         return (
             <svg
                 ref={svg => (this.svg = svg)}
@@ -212,6 +223,10 @@ export class CircleSlider extends React.Component<IProps, IState> {
                 height={`${size}px`}
                 viewBox={`0 0 ${size} ${size}`}
                 onMouseDown={this.handleMouseDown}
+                style={{
+                    padding: offset,
+                    boxSizing: "border-box",
+                }}
             >
                 <g>
                     <circle
@@ -231,13 +246,27 @@ export class CircleSlider extends React.Component<IProps, IState> {
                             stroke: progressColor,
                             fill: "none",
                         }}
-                        d={this.getCurve()}
+                        d={this.getPath()}
                     />
+                    {shadow && (
+                        <filter id="dropShadow" filterUnits="userSpaceOnUse">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                            <feOffset dx="2" dy="2" />
+                            <feComponentTransfer>
+                                <feFuncA type="linear" slope="0.3" />
+                            </feComponentTransfer>
+                            <feMerge>
+                                <feMergeNode />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    )}
                     <circle
                         style={{
                             fill: knobColor,
                             cursor: disabled ? "not-allowed" : "pointer",
                         }}
+                        filter={shadow ? "url(#dropShadow)" : "none"}
                         r={this.getKnobRadius()}
                         cx={this.getPathX()}
                         cy={this.getPathY()}

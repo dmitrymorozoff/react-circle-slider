@@ -134,4 +134,5 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | progressColor | String   | `#eb213a` | color of progress curve                                        |
 | knobColor     | String   | `#eb213a` | color of knob                                                  |
 | disabled      | Boolean  | false     | disabled status                                                |
+| shadow        | Boolean  | true      | shadow on knob                                                 |
 | onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
