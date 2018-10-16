@@ -2,7 +2,7 @@
 
 Circle Slider Component for React
 
-![Imgur](https://i.imgur.com/Mv5IK7D.gif)
+![Imgur](https://i.imgur.com/4RdYfaL.gif)
 
 ## Functionality
 
@@ -122,7 +122,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 | Props         | Type     | Default   | Description                                                    |
 | ------------- | :------- | --------- | -------------------------------------------------------------- |
-| size          | Number   | 100       | size of the slider in px                                       |
+| size          | Number   | 180       | size of the slider in px                                       |
 | stepSize      | Number   | 1         | value to be added or subtracted on each step the slider makes. |
 | knobRadius    | Number   | null      | knob radius in px                                              |
 | circleWidth   | Number   | null      | width of circle in px                                          |
@@ -130,8 +130,13 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | min           | Number   | 0         | the minimum value of the slider                                |
 | max           | Number   | 100       | the maximum value of the slider                                |
 | value         | Number   | 0         | value                                                          |
-| circleColor   | String   | `#243648` | color of slider                                                |
-| progressColor | String   | `#eb213a` | color of progress curve                                        |
-| knobColor     | String   | `#eb213a` | color of knob                                                  |
+| circleColor   | String   | `#e9eaee` | color of slider                                                |
+| progressColor | String   | `#007aff` | color of progress curve                                        |
+| knobColor     | String   | `#fff`    | color of knob                                                  |
 | disabled      | Boolean  | false     | disabled status                                                |
+| shadow        | Boolean  | true      | shadow on knob                                                 |
 | onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
+
+## License
+
+MIT

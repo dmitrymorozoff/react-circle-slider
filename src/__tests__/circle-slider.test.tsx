@@ -55,11 +55,12 @@ describe("circle slider", () => {
 
     it("circle slider should call mouseDown", () => {
         const circleSlider = shallow(<CircleSlider {...this.props} />);
+        const accuracy = 0.00001;
         circleSlider.simulate("mousedown", {
             preventDefault: () => {},
         });
 
-        expect(circleSlider.state("angle")).toEqual(0);
+        expect(circleSlider.state("angle")).toEqual(0 - accuracy);
         expect(circleSlider.state("currentStepValue")).toEqual(0);
     });
 

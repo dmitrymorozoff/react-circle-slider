@@ -1,50 +1,57 @@
 export class CircleSliderHelper {
     private stepsArray: number[];
-    private currentStepIndex: number;
+    private stepIndex: number;
     private countSteps: number;
 
     constructor(stepsArray: number[], initialValue: any) {
         this.stepsArray = stepsArray;
-        this.countSteps = this.stepsArray.length;
-        this.currentStepIndex = 0;
-        this.stepsArray.forEach((step: number, index: number) => {
-            if (step === initialValue) {
-                this.currentStepIndex = index;
-                return;
-            }
-        });
+        this.countSteps = this.stepsArray.length - 1;
+        this.stepIndex = 0;
+        this.setCurrentStepIndexFromArray(initialValue);
     }
 
-    public getAnglePoint() {
-        return (Math.PI * 2) / this.countSteps;
-    }
-
-    public getAngle() {
-        return Math.min(
-            this.getAnglePoint() * this.currentStepIndex,
-            Math.PI * 2 - Number.EPSILON,
+    public getAngle(): number {
+        const accuracy = 0.00001;
+        return (
+            Math.min(
+                this.getAnglePoint() * this.stepIndex,
+                2 * Math.PI - Number.EPSILON,
+            ) - accuracy
         );
     }
 
-    public getCurrentStep() {
-        return this.stepsArray[this.currentStepIndex];
+    public getCurrentStep(): number {
+        return this.stepsArray[this.stepIndex];
     }
 
-    public updateCurrentStepFromValue(value: number) {
+    public updateStepIndexFromValue(value: number) {
+        const isSetValue = this.setCurrentStepIndexFromArray(value);
+        if (isSetValue) {
+            return;
+        }
+        this.stepIndex = this.countSteps;
+    }
+
+    public updateStepIndexFromAngle(angle: number) {
+        const stepIndex = Math.round(angle / this.getAnglePoint());
+        if (stepIndex < this.countSteps) {
+            this.stepIndex = stepIndex;
+            return;
+        }
+        this.stepIndex = this.countSteps;
+    }
+
+    public setCurrentStepIndexFromArray = (value: number): boolean => {
         for (let i = 0; i < this.countSteps; i++) {
             if (value <= this.stepsArray[i]) {
-                this.currentStepIndex = i;
-                return;
+                this.stepIndex = i;
+                return true;
             }
         }
-        this.currentStepIndex = this.countSteps - 1;
-    }
+        return false;
+    };
 
-    public updateCurrentStepFromAngle(angle: number) {
-        const stepIndex = Math.floor(angle / this.getAnglePoint());
-        this.currentStepIndex = Math.min(
-            Math.max(stepIndex, 0),
-            this.countSteps - 1,
-        );
+    public getAnglePoint(): number {
+        return (Math.PI * 2) / this.countSteps;
     }
 }

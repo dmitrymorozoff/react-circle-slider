@@ -2,43 +2,75 @@
 
 exports[`circle slider should render a default circle slider 1`] = `
 <svg
-  height="100px"
+  height="180px"
   onMouseDown={[Function]}
-  viewBox="0 0 100 100"
-  width="100px"
+  style={
+    Object {
+      "boxSizing": "border-box",
+      "padding": "5px",
+    }
+  }
+  viewBox="0 0 180 180"
+  width="180px"
 >
   <g>
     <circle
-      cx={50}
-      cy={50}
-      r={41.666666666666664}
+      cx={90}
+      cy={90}
+      r={70}
       style={
         Object {
           "fill": "none",
-          "stroke": "#EDEDED",
-          "strokeWidth": 5.555555555555555,
+          "stroke": "#e9eaee",
+          "strokeWidth": 5,
         }
       }
     />
     <path
-      d="M50 91.66666666666666 A 41.666666666666664 41.666666666666664 0 0 1 50 91.66666666666666"
+      d="M90 160 A 70 70 0 0 1 90.0007 159.99999999649998"
       style={
         Object {
           "fill": "none",
-          "stroke": "#ADA1FB",
+          "stroke": "#007aff",
           "strokeLinecap": "round",
-          "strokeWidth": 7.142857142857143,
+          "strokeWidth": 20,
         }
       }
     />
+    <filter
+      filterUnits="userSpaceOnUse"
+      id="dropShadow"
+    >
+      <feGaussianBlur
+        in="SourceAlpha"
+        stdDeviation="3"
+      />
+      <feOffset
+        dx="2"
+        dy="2"
+      />
+      <feComponentTransfer>
+        <feFuncA
+          slope="0.3"
+          type="linear"
+        />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode
+          in="SourceGraphic"
+        />
+      </feMerge>
+    </filter>
     <circle
-      cx={50}
-      cy={91.66666666666666}
-      r={8.333333333333334}
+      cx={90.0007}
+      cy={159.99999999649998}
+      filter="url(#dropShadow)"
+      r={20}
       style={
         Object {
           "cursor": "pointer",
-          "fill": "#ADA1FB",
+          "fill": "#fff",
         }
       }
     />
