@@ -1,9 +1,9 @@
-export const generatePath = (
+export const pathGenerator = (
     center: number,
     radius: number,
     direction: number,
-    pathX: number,
-    pathY: number,
+    x: number,
+    y: number,
 ): string => {
     const points = [];
     points.push("M" + center);
@@ -14,7 +14,7 @@ export const generatePath = (
     points.push(0);
     points.push(direction);
     points.push(1);
-    points.push(pathX);
-    points.push(pathY);
+    points.push(x);
+    points.push(y);
     return points.join(" ");
 };

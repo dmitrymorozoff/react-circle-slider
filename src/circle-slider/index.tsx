@@ -1,7 +1,7 @@
 import * as React from "react";
 import { CircleSliderHelper } from "./helpers/circle-slider-helper";
-import { generatePath } from "./helpers/generate-path";
 import { MouseHelper } from "./helpers/mouse-helper";
+import { pathGenerator } from "./helpers/path-generator";
 
 interface IProps {
     size?: number;
@@ -16,11 +16,13 @@ interface IProps {
     progressColor?: string;
     knobColor?: string;
     onChange: ((value?: number) => void);
-    circleWidthInit?: number;
-    knobRadiusInit?: number;
-    progressWidthInit?: number;
     disabled?: boolean;
     shadow?: boolean;
+}
+
+interface IPoint {
+    x: number;
+    y: number;
 }
 
 interface IState {
@@ -36,9 +38,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
         value: 0,
         progressColor: "#007aff",
         knobColor: "#fff",
-        circleWidthInit: 20,
-        progressWidthInit: 5,
-        knobRadiusInit: 5,
+        circleWidth: 5,
+        progressWidth: 20,
+        knobRadius: 20,
         stepSize: 1,
         min: 0,
         max: 100,
@@ -62,17 +64,19 @@ export class CircleSlider extends React.Component<IProps, IState> {
             isMouseMove: false,
         };
 
-        this.maxLineWidth = Math.max(
-            this.getMainCircleStrokeWidth(),
-            this.getMainProgressStrokeWidth(),
-        );
+        const {
+            min,
+            max,
+            stepSize,
+            value,
+            circleWidth,
+            progressWidth,
+            knobRadius,
+        } = this.props;
 
+        this.maxLineWidth = Math.max(circleWidth!, progressWidth!);
         this.radius =
-            this.getCenter() -
-            Math.max(this.maxLineWidth, this.getKnobRadius() * 2) / 2;
-
-        const { min, max, stepSize, value } = this.props;
-
+            this.getCenter() - Math.max(this.maxLineWidth, knobRadius! * 2) / 2;
         this.countSteps = 1 + (max! - min!) / stepSize!;
         this.stepsArray = this.getStepsArray(min!, stepSize!);
 
@@ -123,20 +127,6 @@ export class CircleSlider extends React.Component<IProps, IState> {
         });
     };
 
-    public getMainCircleStrokeWidth = (): number => {
-        const { circleWidth, circleWidthInit, size } = this.props;
-        return circleWidth === undefined
-            ? size! / 2 / circleWidthInit!
-            : circleWidth;
-    };
-
-    public getMainProgressStrokeWidth = (): number => {
-        const { progressWidth, progressWidthInit, size } = this.props;
-        return progressWidth === undefined
-            ? size! / 2 / progressWidthInit!
-            : progressWidth;
-    };
-
     public getCenter = (): number => {
         return this.props.size! / 2;
     };
@@ -145,21 +135,13 @@ export class CircleSlider extends React.Component<IProps, IState> {
         return this.state.angle + Math.PI / 2;
     };
 
-    public getKnobRadius = (): number => {
-        const { knobRadius, knobRadiusInit, size } = this.props;
-        return knobRadius || size! / 2 / knobRadiusInit!;
-    };
-
-    public getPathX = (): number => {
-        return this.getCenter() + this.radius * Math.cos(this.getAngle());
-    };
-
-    public getPathY = (): number => {
-        return this.getCenter() + this.radius * Math.sin(this.getAngle());
-    };
-
-    public getPathDirection = (): number => {
-        return this.getAngle() < (3 / 2) * Math.PI ? 0 : 1;
+    public getPointPosition = (): IPoint => {
+        const center = this.getCenter();
+        const angle = this.getAngle();
+        return {
+            x: center + this.radius * Math.cos(angle),
+            y: center + this.radius * Math.sin(angle),
+        };
     };
 
     public getStepsArray = (min: number, stepSize: number): number[] => {
@@ -172,10 +154,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
 
     public getPath = (): string => {
         const center = this.getCenter();
-        const direction = this.getPathDirection();
-        const pathX = this.getPathX();
-        const pathY = this.getPathY();
-        const path = generatePath(center, this.radius, direction, pathX, pathY);
+        const direction = this.getAngle() < 1.5 * Math.PI ? 0 : 1;
+        const { x, y } = this.getPointPosition();
+        const path = pathGenerator(center, this.radius, direction, x, y);
         return path;
     };
 
@@ -213,9 +194,13 @@ export class CircleSlider extends React.Component<IProps, IState> {
             circleColor,
             disabled,
             shadow,
+            circleWidth,
+            progressWidth,
+            knobRadius,
         } = this.props;
         const offset = shadow ? "5px" : "0px";
-
+        const { x, y } = this.getPointPosition();
+        const center = this.getCenter();
         return (
             <svg
                 ref={svg => (this.svg = svg)}
@@ -231,18 +216,18 @@ export class CircleSlider extends React.Component<IProps, IState> {
                 <g>
                     <circle
                         style={{
-                            strokeWidth: this.getMainCircleStrokeWidth(),
+                            strokeWidth: circleWidth!,
                             stroke: circleColor,
                             fill: "none",
                         }}
                         r={this.radius}
-                        cx={this.getCenter()}
-                        cy={this.getCenter()}
+                        cx={center}
+                        cy={center}
                     />
                     <path
                         style={{
                             strokeLinecap: "round",
-                            strokeWidth: this.getMainProgressStrokeWidth(),
+                            strokeWidth: progressWidth!,
                             stroke: progressColor,
                             fill: "none",
                         }}
@@ -267,9 +252,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
                             cursor: disabled ? "not-allowed" : "pointer",
                         }}
                         filter={shadow ? "url(#dropShadow)" : "none"}
-                        r={this.getKnobRadius()}
-                        cx={this.getPathX()}
-                        cy={this.getPathY()}
+                        r={knobRadius!}
+                        cx={x}
+                        cy={y}
                     />
                 </g>
             </svg>
