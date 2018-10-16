@@ -16,8 +16,8 @@ export class MouseHelper {
         const rectSize = this.container.getBoundingClientRect();
         const width = rectSize.width;
         this.center = width / 2;
-        this.relativeX = event.x - rectSize.left;
-        this.relativeY = event.y - rectSize.top;
+        this.relativeX = event.clientX - rectSize.left;
+        this.relativeY = event.clientY - rectSize.top;
     }
 
     public getNewSliderAngle(): number {

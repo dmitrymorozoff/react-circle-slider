@@ -185,6 +185,27 @@ export class CircleSlider extends React.Component<IProps, IState> {
             window.addEventListener("mouseup", this.handleMouseUp);
         }
     };
+    public handleTouchMove: any = (
+        event: React.TouchEvent<SVGSVGElement>,
+    ): void => {
+        const targetTouches = event.targetTouches;
+        const countTouches = targetTouches.length;
+        const currentTouch: React.Touch = targetTouches.item(countTouches - 1)!;
+        this.mouseHelper.setPosition(currentTouch);
+        this.updateSlider();
+    };
+
+    public handleTouchUp = (): void => {
+        window.removeEventListener("touchmove", this.handleTouchMove);
+        window.removeEventListener("touchend", this.handleTouchUp);
+    };
+
+    public handleTouchStart = (): void => {
+        if (!this.props.disabled) {
+            window.addEventListener("touchmove", this.handleTouchMove);
+            window.addEventListener("touchend", this.handleTouchUp);
+        }
+    };
 
     public render() {
         const {
@@ -208,6 +229,7 @@ export class CircleSlider extends React.Component<IProps, IState> {
                 height={`${size}px`}
                 viewBox={`0 0 ${size} ${size}`}
                 onMouseDown={this.handleMouseDown}
+                onTouchStart={this.handleTouchStart}
                 style={{
                     padding: offset,
                     boxSizing: "border-box",
