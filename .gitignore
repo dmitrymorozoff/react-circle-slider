@@ -5,7 +5,7 @@
 # Build files
 /styleguide/
 /dist/
-/lib/
+lib
 /build/
 .cache
 
