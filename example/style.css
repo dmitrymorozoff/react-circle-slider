@@ -1,14 +1,14 @@
 .container {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     margin: 0 auto;
     width: 650px;
 }
 
 .wrapper {
-    width: 280px;
-    height: 280px;
+    width: 350px;
+    height: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,5 +26,9 @@
 .range {
     display: flex;
     justify-content: center;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+}
+
+.code {
+    margin-top: 1.5rem;
 }

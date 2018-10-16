@@ -1,5 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import SyntaxHighlighter from "react-syntax-highlighter/prism";
+import { vs } from "react-syntax-highlighter/styles/prism";
 import { CircleSlider } from "../src/circle-slider";
 
 interface IState {
@@ -23,6 +25,7 @@ export class App extends React.Component<{}, IState> {
 
     public render() {
         const { value } = this.state;
+        const codeString = `npm install --save react-circle-slider`;
         return (
             <div className="container">
                 <div className="wrapper">
@@ -37,6 +40,11 @@ export class App extends React.Component<{}, IState> {
                             value={value}
                             onChange={this.handleChangeRange}
                         />
+                    </div>
+                    <div className="code">
+                        <SyntaxHighlighter language="bash" style={vs}>
+                            {codeString}
+                        </SyntaxHighlighter>
                     </div>
                 </div>
             </div>

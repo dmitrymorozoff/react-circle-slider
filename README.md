@@ -137,6 +137,12 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | shadow        | Boolean  | true      | shadow on knob                                                 |
 | onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
 
+## Contributing
+
+- For bugs and feature requests, please create an issue
+- Lint and test your code
+- Pull requests and ★ stars are always welcome
+
 ## License
 
 MIT
