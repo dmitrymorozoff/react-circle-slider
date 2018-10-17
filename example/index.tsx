@@ -29,7 +29,11 @@ export class App extends React.Component<{}, IState> {
         return (
             <div className="container">
                 <div className="wrapper">
-                    <CircleSlider value={value} onChange={this.handleChange} />
+                    <CircleSlider
+                        value={value}
+                        onChange={this.handleChange}
+                        showTooltip={true}
+                    />
                     <div className="title">{value}</div>
                     <div className="range">
                         <input
