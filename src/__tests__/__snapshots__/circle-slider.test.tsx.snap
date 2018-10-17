@@ -4,6 +4,7 @@ exports[`circle slider should render a default circle slider 1`] = `
 <svg
   height="180px"
   onMouseDown={[Function]}
+  onTouchStart={[Function]}
   style={
     Object {
       "boxSizing": "border-box",

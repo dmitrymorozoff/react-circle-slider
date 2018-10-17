@@ -11,6 +11,7 @@ Circle Slider Component for React
 -   Highly customizable
 -   Defining min and max values
 -   Defining step size
+-   Touch support
 -   Style based: no images / SVGs
 
 ## Examples
@@ -135,6 +136,9 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | knobColor     | String   | `#fff`    | color of knob                                                  |
 | disabled      | Boolean  | false     | disabled status                                                |
 | shadow        | Boolean  | true      | shadow on knob                                                 |
+| showTooltip   | Boolean  | false     | tooltip                                                        |
+| tooltipSize   | Number   | 38        | size of tooltip                                                |
+| tooltipColor  | String   | `#333`    | color of tooltip                                               |
 | onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
 
 ## Contributing

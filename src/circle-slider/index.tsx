@@ -18,6 +18,9 @@ interface IProps {
     onChange: ((value?: number) => void);
     disabled?: boolean;
     shadow?: boolean;
+    showTooltip?: boolean;
+    tooltipSize?: number;
+    tooltipColor?: string;
 }
 
 interface IPoint {
@@ -46,6 +49,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
         max: 100,
         disabled: false,
         shadow: true,
+        showTooltip: false,
+        tooltipSize: 38,
+        tooltipColor: "#333",
         onChange: () => ({}),
     };
     private maxLineWidth: number;
@@ -218,6 +224,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
             circleWidth,
             progressWidth,
             knobRadius,
+            showTooltip,
+            tooltipSize,
+            tooltipColor,
         } = this.props;
         const offset = shadow ? "5px" : "0px";
         const { x, y } = this.getPointPosition();
@@ -278,6 +287,18 @@ export class CircleSlider extends React.Component<IProps, IState> {
                         cx={x}
                         cy={y}
                     />
+                    {showTooltip && (
+                        <text
+                            x={size! / 2}
+                            y={size! / 2 + tooltipSize! / 3}
+                            textAnchor={"middle"}
+                            fontSize={tooltipSize!}
+                            fontFamily="Arial"
+                            fill={tooltipColor}
+                        >
+                            {this.state.currentStepValue}
+                        </text>
+                    )}
                 </g>
             </svg>
         );
