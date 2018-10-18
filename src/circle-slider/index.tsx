@@ -50,7 +50,7 @@ export class CircleSlider extends React.Component<IProps, IState> {
         disabled: false,
         shadow: true,
         showTooltip: false,
-        tooltipSize: 38,
+        tooltipSize: 32,
         tooltipColor: "#333",
         onChange: () => ({}),
     };
