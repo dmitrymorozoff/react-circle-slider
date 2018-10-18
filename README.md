@@ -12,17 +12,25 @@ Circle Slider Component for React
 -   Defining min and max values
 -   Defining step size
 -   Touch support
+-   Tooltip support
 -   Style based: no images / SVGs
+
+## Todo
+
+- [ ] Keyboard support
+- [ ] Mouse scroll support
+- [ ] Accessibility 
 
 ## Examples
 
 -   To check out live examples visit https://dmitrymorozoff.github.io/react-circle-slider/
 
-## Installation
+## Getting started
 
-```bash
-$ npm install --save react-circle-slider
-```
+Install `react-circle-slider` using npm.
+
+### `npm install --save react-circle-slider`
+
 
 You can also test the components locally by cloning this repo and doing the following steps:
 
@@ -30,27 +38,20 @@ You can also test the components locally by cloning this repo and doing the foll
 
 Install dependencies from package.json:
 
-```bash
-$ npm install
-```
+### `npm install`
 
-Start local development server `localhost:8080`:
+Runs the app in the development mode.<br>
+Open [http://localhost:1234](http://localhost:1234) to view it in the browser.
 
-```bash
-$ npm run dev
-```
+### `npm run dev`
 
 Run linter
 
-```bash
-$ npm run lint
-```
+### `npm run lint`
 
 Start tests followed by jest
 
-```bash
-$ npm run test
-```
+### `npm run test`
 
 ## Usage
 
@@ -79,39 +80,7 @@ export class App extends React.Component {
     render() {
         const { value } = this.state;
         return (
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <CircleSlider value={value} onChange={this.handleChange} />
-                <div
-                    style={{
-                        textAlign: "center",
-                        fontFamily: "sans-serif",
-                        marginTop: "0.5rem",
-                    }}
-                >
-                    {value}
-                </div>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "0.5rem",
-                    }}
-                >
-                    <input
-                        id="control"
-                        type="range"
-                        value={value}
-                        onChange={this.handleChangeRange}
-                    />
-                </div>
-            </div>
+            <CircleSlider value={value} onChange={this.handleChange} />
         );
     }
 }
@@ -137,7 +106,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | disabled      | Boolean  | false     | disabled status                                                |
 | shadow        | Boolean  | true      | shadow on knob                                                 |
 | showTooltip   | Boolean  | false     | tooltip                                                        |
-| tooltipSize   | Number   | 38        | size of tooltip                                                |
+| tooltipSize   | Number   | 32        | size of tooltip                                                |
 | tooltipColor  | String   | `#333`    | color of tooltip                                               |
 | onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
 
@@ -145,7 +114,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 - For bugs and feature requests, please create an issue
 - Lint and test your code
-- Pull requests and ★ stars are always welcome
+- Pull requests and ⭐ stars are always welcome
 
 ## License
 
