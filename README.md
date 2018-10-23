@@ -1,6 +1,6 @@
 # react-circle-slider
 
-Circle Slider Component for React
+Circle Slider Component for React.js
 
 ![Imgur](https://i.imgur.com/4RdYfaL.gif)
 
@@ -14,12 +14,6 @@ Circle Slider Component for React
 -   Touch support
 -   Tooltip support
 -   Style based: no images / SVGs
-
-## Todo
-
-- [ ] Keyboard support
-- [ ] Mouse scroll support
-- [ ] Accessibility 
 
 ## Examples
 
@@ -109,6 +103,12 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | tooltipSize   | Number   | 32        | size of tooltip                                                |
 | tooltipColor  | String   | `#333`    | color of tooltip                                               |
 | onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
+
+## Todo
+
+- [ ] Keyboard support
+- [ ] Mouse scroll support
+- [ ] Accessibility 
 
 ## Contributing
 
