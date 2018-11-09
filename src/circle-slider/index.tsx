@@ -255,11 +255,17 @@ export class CircleSlider extends React.Component<IProps, IState> {
                         cx={center}
                         cy={center}
                     />
+                    <defs>
+                        <linearGradient id="grad1" x1="0" x2="0" y1="0" y2="1">
+                            <stop offset="0%" stop-color="#CD78D7" />
+                            <stop offset="100%" stop-color="#78B0E8" />
+                        </linearGradient>
+                    </defs>
                     <path
                         style={{
                             strokeLinecap: "round",
                             strokeWidth: progressWidth!,
-                            stroke: progressColor,
+                            stroke: "url(#grad1)",
                             fill: "none",
                         }}
                         d={this.getPath()}
@@ -277,6 +283,7 @@ export class CircleSlider extends React.Component<IProps, IState> {
                             </feMerge>
                         </filter>
                     )}
+
                     <circle
                         style={{
                             fill: knobColor,
