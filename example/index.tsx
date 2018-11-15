@@ -44,6 +44,7 @@ export class App extends React.Component<{}, IState> {
                             {codeString}
                         </SyntaxHighlighter>
                     </div>
+                    <h3>Default</h3>
                     <div className="wrapper">
                         <div className="slider">
                             <CircleSlider
@@ -72,42 +73,7 @@ export class App extends React.Component<{}, IState> {
                             </SyntaxHighlighter>
                         </div>
                     </div>
-                    <div className="wrapper">
-                        <div className="slider">
-                            <CircleSlider
-                                value={value}
-                                size={150}
-                                shadow={false}
-                                knobColor="#ff5722"
-                                onChange={this.handleChange}
-                                showTooltip={true}
-                                progressColor="#FDB11B"
-                            />
-                            <div className="title">{value}</div>
-                            <div className="range">
-                                <input
-                                    min={0}
-                                    max={100}
-                                    id="control"
-                                    type="range"
-                                    value={value}
-                                    onChange={this.handleChangeRange}
-                                />
-                            </div>
-                        </div>
-                        <div className="code">
-                            <SyntaxHighlighter language="jsx" style={ghcolors}>
-                                {`<CircleSlider
-    value={value}
-    size={150}
-    shadow={false}
-    knobColor="#ff5722"
-    showTooltip={true}
-    progressColor="#FDB11B"
-/>`}
-                            </SyntaxHighlighter>
-                        </div>
-                    </div>
+                    <h3>Custom progress color</h3>
                     <div className="wrapper">
                         <div className="slider">
                             <CircleSlider
@@ -136,6 +102,42 @@ export class App extends React.Component<{}, IState> {
                             </SyntaxHighlighter>
                         </div>
                     </div>
+                    <h3>Custom gradient color</h3>
+                    <div className="wrapper">
+                        <div className="slider">
+                            <CircleSlider
+                                value={value}
+                                size={150}
+                                onChange={this.handleChange}
+                                showTooltip={true}
+                                gradientColorFrom="#FEA346"
+                                gradientColorTo="#F8616D"
+                            />
+                            <div className="title">{value}</div>
+                            <div className="range">
+                                <input
+                                    min={0}
+                                    max={100}
+                                    id="control"
+                                    type="range"
+                                    value={value}
+                                    onChange={this.handleChangeRange}
+                                />
+                            </div>
+                        </div>
+                        <div className="code">
+                            <SyntaxHighlighter language="jsx" style={ghcolors}>
+                                {`<CircleSlider
+    value={value}
+    size={150}
+    showTooltip={true}
+    gradientColorFrom="#FEA346"
+    gradientColorTo="#F8616D"
+/>`}
+                            </SyntaxHighlighter>
+                        </div>
+                    </div>
+                    <h3>Colors</h3>
                     <div className="wrapper">
                         <div className="slider">
                             <CircleSlider
@@ -178,6 +180,44 @@ export class App extends React.Component<{}, IState> {
                             </SyntaxHighlighter>
                         </div>
                     </div>
+                    <h3>Shadow</h3>
+                    <div className="wrapper">
+                        <div className="slider">
+                            <CircleSlider
+                                value={value}
+                                size={150}
+                                shadow={false}
+                                knobColor="#ff5722"
+                                onChange={this.handleChange}
+                                showTooltip={true}
+                                progressColor="#FDB11B"
+                            />
+                            <div className="title">{value}</div>
+                            <div className="range">
+                                <input
+                                    min={0}
+                                    max={100}
+                                    id="control"
+                                    type="range"
+                                    value={value}
+                                    onChange={this.handleChangeRange}
+                                />
+                            </div>
+                        </div>
+                        <div className="code">
+                            <SyntaxHighlighter language="jsx" style={ghcolors}>
+                                {`<CircleSlider
+    value={value}
+    size={150}
+    shadow={false}
+    knobColor="#ff5722"
+    showTooltip={true}
+    progressColor="#FDB11B"
+/>`}
+                            </SyntaxHighlighter>
+                        </div>
+                    </div>
+                    <h3>Sizes</h3>
                     <div className="wrapper">
                         <div className="slider">
                             <CircleSlider
@@ -214,6 +254,7 @@ export class App extends React.Component<{}, IState> {
                             </SyntaxHighlighter>
                         </div>
                     </div>
+                    <h3>Exact sizes</h3>
                     <div className="wrapper">
                         <div className="slider">
                             <CircleSlider
