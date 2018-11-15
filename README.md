@@ -1,16 +1,17 @@
-# react-circle-slider
+# 🕹️ react-circle-slider
 
 Circle Slider Component for React.js
 
 ![Imgur](https://i.imgur.com/4RdYfaL.gif)
 
-## Functionality
+## ⚡ Functionality
 
 -   Simple to use
 -   No extra dependencies
 -   Highly customizable
 -   Defining min and max values
 -   Defining step size
+-   Defining gradient color
 -   Touch support
 -   Tooltip support
 -   Style based: no images / SVGs
@@ -19,7 +20,7 @@ Circle Slider Component for React.js
 
 -   To check out live examples visit https://dmitrymorozoff.github.io/react-circle-slider/
 
-## Getting started
+## 🚀 Getting started
 
 Install `react-circle-slider` using npm.
 
@@ -28,7 +29,7 @@ Install `react-circle-slider` using npm.
 
 You can also test the components locally by cloning this repo and doing the following steps:
 
-## NPM-scripts
+## 🔲 NPM-scripts
 
 Install dependencies from package.json:
 
@@ -82,35 +83,37 @@ export class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
-## Props
+## 📃 Props
 
-| Props         | Type     | Default   | Description                                                    |
-| ------------- | :------- | --------- | -------------------------------------------------------------- |
-| size          | Number   | 180       | size of the slider in px                                       |
-| stepSize      | Number   | 1         | value to be added or subtracted on each step the slider makes. |
-| knobRadius    | Number   | null      | knob radius in px                                              |
-| circleWidth   | Number   | null      | width of circle in px                                          |
-| progressWidth | Number   | null      | progress curve width in px                                     |
-| min           | Number   | 0         | the minimum value of the slider                                |
-| max           | Number   | 100       | the maximum value of the slider                                |
-| value         | Number   | 0         | value                                                          |
-| circleColor   | String   | `#e9eaee` | color of slider                                                |
-| progressColor | String   | `#007aff` | color of progress curve                                        |
-| knobColor     | String   | `#fff`    | color of knob                                                  |
-| disabled      | Boolean  | false     | disabled status                                                |
-| shadow        | Boolean  | true      | shadow on knob                                                 |
-| showTooltip   | Boolean  | false     | tooltip                                                        |
-| tooltipSize   | Number   | 32        | size of tooltip                                                |
-| tooltipColor  | String   | `#333`    | color of tooltip                                               |
-| onChange      | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
+| Props             | Type     | Default   | Description                                                    |
+| ----------------- | :------- | --------- | -------------------------------------------------------------- |
+| size              | Number   | 180       | size of the slider in px                                       |
+| stepSize          | Number   | 1         | value to be added or subtracted on each step the slider makes. |
+| knobRadius        | Number   | null      | knob radius in px                                              |
+| circleWidth       | Number   | null      | width of circle in px                                          |
+| progressWidth     | Number   | null      | progress curve width in px                                     |
+| min               | Number   | 0         | the minimum value of the slider                                |
+| max               | Number   | 100       | the maximum value of the slider                                |
+| value             | Number   | 0         | value                                                          |
+| circleColor       | String   | `#e9eaee` | color of slider                                                |
+| progressColor     | String   | `#007aff` | color of progress curve                                        |
+| gradientColorFrom | String   | NOOP      | start gradient color of progress curve                         |
+| gradientColorTo   | String   | NOOP      | end gradient color progress curve                              |
+| knobColor         | String   | `#fff`    | color of knob                                                  |
+| disabled          | Boolean  | false     | disabled status                                                |
+| shadow            | Boolean  | true      | shadow on knob                                                 |
+| showTooltip       | Boolean  | false     | tooltip                                                        |
+| tooltipSize       | Number   | 32        | size of tooltip                                                |
+| tooltipColor      | String   | `#333`    | color of tooltip                                               |
+| onChange          | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
 
-## Todo
+## 💡 Todo
 
 - [ ] Keyboard support
 - [ ] Mouse scroll support
 - [ ] Accessibility 
 
-## Contributing
+## 💻 Contributing
 
 - For bugs and feature requests, please create an issue
 - Lint and test your code

@@ -14,6 +14,8 @@ interface IProps {
     max?: number;
     circleColor?: string;
     progressColor?: string;
+    gradientColorFrom?: string;
+    gradientColorTo?: string;
     knobColor?: string;
     onChange: ((value?: number) => void);
     disabled?: boolean;
@@ -217,6 +219,8 @@ export class CircleSlider extends React.Component<IProps, IState> {
         const {
             size,
             progressColor,
+            gradientColorFrom,
+            gradientColorTo,
             knobColor,
             circleColor,
             disabled,
@@ -231,6 +235,8 @@ export class CircleSlider extends React.Component<IProps, IState> {
         const offset = shadow ? "5px" : "0px";
         const { x, y } = this.getPointPosition();
         const center = this.getCenter();
+        const isAllGradientColorsAvailable =
+            gradientColorFrom && gradientColorTo;
         return (
             <svg
                 ref={svg => (this.svg = svg)}
@@ -255,17 +261,33 @@ export class CircleSlider extends React.Component<IProps, IState> {
                         cx={center}
                         cy={center}
                     />
-                    <defs>
-                        <linearGradient id="grad1" x1="0" x2="0" y1="0" y2="1">
-                            <stop offset="0%" stop-color="#CD78D7" />
-                            <stop offset="100%" stop-color="#78B0E8" />
-                        </linearGradient>
-                    </defs>
+                    {isAllGradientColorsAvailable && (
+                        <defs>
+                            <linearGradient
+                                id="gradient"
+                                x1="0"
+                                x2="0"
+                                y1="0"
+                                y2="1"
+                            >
+                                <stop
+                                    offset="0%"
+                                    stop-color={gradientColorFrom}
+                                />
+                                <stop
+                                    offset="100%"
+                                    stop-color={gradientColorTo}
+                                />
+                            </linearGradient>
+                        </defs>
+                    )}
                     <path
                         style={{
                             strokeLinecap: "round",
                             strokeWidth: progressWidth!,
-                            stroke: "url(#grad1)",
+                            stroke: isAllGradientColorsAvailable
+                                ? "url(#gradient)"
+                                : progressColor,
                             fill: "none",
                         }}
                         d={this.getPath()}
@@ -283,7 +305,6 @@ export class CircleSlider extends React.Component<IProps, IState> {
                             </feMerge>
                         </filter>
                     )}
-
                     <circle
                         style={{
                             fill: knobColor,
