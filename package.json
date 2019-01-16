@@ -1,6 +1,6 @@
 {
     "name": "react-circle-slider",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "description": "Circle Slider UI component for React",
     "main": "./lib/index.js",
     "repository": {

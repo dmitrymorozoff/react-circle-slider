@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "module": "esnext",
+        "module": "commonjs",
+        "target": "es5",
         "moduleResolution": "node",
-        "target": "esnext",
         "downlevelIteration": true,
         "strict": true,
         "strictFunctionTypes": false,

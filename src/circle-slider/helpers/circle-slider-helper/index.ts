@@ -1,3 +1,8 @@
+interface INumber {
+    EPSILON: any;
+}
+declare var Number: INumber;
+
 export class CircleSliderHelper {
     private stepsArray: number[];
     private stepIndex: number;
