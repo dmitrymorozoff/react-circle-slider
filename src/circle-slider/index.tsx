@@ -272,11 +272,11 @@ export class CircleSlider extends React.Component<IProps, IState> {
                             >
                                 <stop
                                     offset="0%"
-                                    stop-color={gradientColorFrom}
+                                    stopColor={gradientColorFrom}
                                 />
                                 <stop
                                     offset="100%"
-                                    stop-color={gradientColorTo}
+                                    stopColor={gradientColorTo}
                                 />
                             </linearGradient>
                         </defs>
