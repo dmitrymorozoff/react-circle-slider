@@ -21,6 +21,7 @@ interface IProps {
     disabled?: boolean;
     shadow?: boolean;
     showTooltip?: boolean;
+    showPercentage?: boolean;
     tooltipSize?: number;
     tooltipColor?: string;
 }
@@ -52,6 +53,7 @@ export class CircleSlider extends React.Component<IProps, IState> {
         disabled: false,
         shadow: true,
         showTooltip: false,
+        showPercentage: false,
         tooltipSize: 32,
         tooltipColor: "#333",
         onChange: () => ({}),
@@ -229,9 +231,11 @@ export class CircleSlider extends React.Component<IProps, IState> {
             progressWidth,
             knobRadius,
             showTooltip,
+            showPercentage,
             tooltipSize,
             tooltipColor,
         } = this.props;
+        const { currentStepValue } = this.state;
         const offset = shadow ? "5px" : "0px";
         const { x, y } = this.getPointPosition();
         const center = this.getCenter();
@@ -324,7 +328,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
                             fontFamily="Arial"
                             fill={tooltipColor}
                         >
-                            {this.state.currentStepValue}
+                            {showPercentage
+                                ? `${currentStepValue}%`
+                                : currentStepValue}
                         </text>
                     )}
                 </g>
