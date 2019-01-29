@@ -190,6 +190,7 @@ export class App extends React.Component<{}, IState> {
                                 knobColor="#ff5722"
                                 onChange={this.handleChange}
                                 showTooltip={true}
+                                showPercentage={true}
                                 progressColor="#FDB11B"
                             />
                             <div className="title">{value}</div>
@@ -212,6 +213,7 @@ export class App extends React.Component<{}, IState> {
     shadow={false}
     knobColor="#ff5722"
     showTooltip={true}
+    showPercentage={true}
     progressColor="#FDB11B"
 />`}
                             </SyntaxHighlighter>

@@ -103,6 +103,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 | disabled          | Boolean  | false     | disabled status                                                |
 | shadow            | Boolean  | true      | shadow on knob                                                 |
 | showTooltip       | Boolean  | false     | tooltip                                                        |
+| showPercentage    | Boolean  | false     | percentage on tooltip                                          |
 | tooltipSize       | Number   | 32        | size of tooltip                                                |
 | tooltipColor      | String   | `#333`    | color of tooltip                                               |
 | onChange          | Function | NOOP      | when slider is moved, `onChange` is triggered.                 |
