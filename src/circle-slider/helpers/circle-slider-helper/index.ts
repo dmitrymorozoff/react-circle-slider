@@ -53,6 +53,7 @@ export class CircleSliderHelper {
                 return true;
             }
         }
+        this.stepIndex = this.countSteps;
         return false;
     };
 

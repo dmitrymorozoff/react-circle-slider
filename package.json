@@ -1,6 +1,6 @@
 {
     "name": "react-circle-slider",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "description": "Circle Slider UI component for React",
     "main": "./lib/index.js",
     "repository": {
@@ -44,7 +44,7 @@
         "parcel-bundler": "^1.9.7",
         "prettier": "^1.14.2",
         "react-addons-test-utils": "^15.5.1",
-        "react-syntax-highlighter": "^9.0.0",
+        "react-syntax-highlighter": "^9.0.1",
         "rimraf": "^2.6.2",
         "sinon": "^6.1.5",
         "source-map-loader": "^0.2.4",
@@ -59,7 +59,7 @@
         "webpack-cli": "^3.1.0"
     },
     "dependencies": {
-        "react": "^16.0.0",
+        "react": "^16.7.0",
         "react-dom": "^16.0.0"
     }
 }
