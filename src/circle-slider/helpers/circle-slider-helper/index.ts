@@ -15,12 +15,20 @@ export class CircleSliderHelper {
         this.setCurrentStepIndexFromArray(initialValue);
     }
 
+    public getEpsilon() {
+        var e = 1.0;
+        while ( ( 1.0 + 0.5 * e ) !== 1.0 )
+          e *= 0.5;
+        return e;
+    }
+
     public getAngle(): number {
         const accuracy = 0.00001;
+        const episilon = Number.EPSILON || this.getEpsilon();
         return (
             Math.min(
                 this.getAnglePoint() * this.stepIndex,
-                2 * Math.PI - Number.EPSILON,
+                2 * Math.PI - episilon,
             ) - accuracy
         );
     }
