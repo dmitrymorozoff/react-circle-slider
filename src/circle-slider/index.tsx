@@ -110,6 +110,13 @@ export class CircleSlider extends React.Component<IProps, IState> {
         }
     }
 
+    public componentWillUnmount() {
+        window.removeEventListener("mousemove", this.handleMouseMove);
+        window.removeEventListener("mouseup", this.handleMouseUp);
+        window.removeEventListener("touchmove", this.handleTouchMove);
+        window.removeEventListener("touchend", this.handleTouchUp);
+    }
+
     public updateAngle = (angle: number): void => {
         this.circleSliderHelper.updateStepIndexFromAngle(angle);
         const currentStep = this.circleSliderHelper.getCurrentStep();
