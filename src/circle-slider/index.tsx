@@ -104,9 +104,9 @@ export class CircleSlider extends React.Component<IProps, IState> {
         });
     }
 
-    public componentWillReceiveProps(nextProps: any) {
-        if (this.props.value !== nextProps.value && !this.state.isMouseMove) {
-            this.updateSliderFromProps(nextProps.value);
+    public componentDidUpdate(prevProps: IProps) {
+        if (this.props.value !== prevProps.value && !this.state.isMouseMove && prevProps.value) {
+            this.updateSliderFromProps(prevProps.value);
         }
     }
 
