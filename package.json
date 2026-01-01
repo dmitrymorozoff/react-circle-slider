@@ -40,7 +40,7 @@
         "enzyme": "^3.5.0",
         "enzyme-adapter-react-16": "^1.2.0",
         "enzyme-to-json": "^3.3.4",
-        "jest": "^23.5.0",
+        "jest": "^30.2.0",
         "parcel-bundler": "^1.9.7",
         "prettier": "^1.14.2",
         "react-addons-test-utils": "^15.5.1",
